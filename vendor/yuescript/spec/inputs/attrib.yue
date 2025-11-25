@@ -1,0 +1,58 @@
+const a, b, c, d = 1, 2, 3, 4
+
+do
+	close a, b = setmetatable {},__close:=> print "closed"
+	const c, d = 123, 'abc'
+
+	close a, b
+	const c, d
+
+do
+	const a, {b, c}, {d} = f!, f1!
+
+do
+	const a, {b, c}, {d} = f!
+
+do
+	const [a, b] = [2, 3]
+
+do
+	close v = if flag
+		func!
+	else
+		setmetatable {},__close:=>
+
+	close f = with io.open "file.txt"
+		\write "Hello"
+
+do
+	const a = 1 if true
+	close b = (if x then 1) unless false
+	const c = (switch x
+		when "abc" then 998) if true
+	close d =
+		:value if a ?? b
+
+do
+	close _ = with io.open "file.txt"
+		\write "Hello"
+	
+	close _ = <close>: -> print "second"
+
+	close _ = <close>: -> print "first"
+
+	print "third"
+
+_defers = setmetatable {}, __close: =>
+	@[#@]!
+	@[#@] = nil
+
+def = (item)->
+	_defers[#_defers + 1] = item
+	_defers
+
+do
+	close _ = def -> print 3
+	close _ = def -> print 2
+	close _ = def -> print 1
+

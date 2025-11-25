@@ -1,0 +1,346 @@
+
+backpack =
+	something:
+		yeah: 200
+		they: ->
+			print "hello"
+			yor_feet"small"
+		pretty: hair
+		gold: hmm
+	yow: 1000
+
+	eat: goo
+	yeah: dudd
+
+
+start =
+	something: "cold"
+
+bathe =
+	on: "fire"
+
+another =
+	[4]: 232
+	["good food"]: "is the best"
+
+fwip =
+	something: hello"what", number: 2323,
+	what: yo "momma", "yeah",
+	fruit: basket
+	nuts: day
+
+
+frick = hello: "world"
+
+frack, best = hello: "world", rice: 3434, "what"
+
+ya = { 1,2,3, key: 100, 343, "hello", umm: 232 }
+
+
+x = { 1,2,
+	4343, 343 ,343 }
+
+x1 = [ 1,2,
+	4343, 343 ,343 ]
+
+g, p = {
+	1,2, nowy: "yes", 3,4,
+	hey: 232, another: "day"
+}, 234
+
+annother = {
+	1,2,3
+	3,4,5
+	6,7,8
+}
+
+annother = [
+	1,2,3
+	3,4,5
+	6,7,8
+]
+
+yeah = {
+	[232]: 3434, "helo"
+	ice: "cake"
+}
+
+-- confusing stuff...
+whatabout = {
+	hello world, another
+	what, about, now
+
+	hello"world", yeah
+	hello "world", yeah
+}
+
+x =
+	-- yeah
+	something: => "hello"
+	cool: -- umm
+		--so ething
+		bed: {
+			2323,2323
+		}
+		red: 2343 -- here
+	-- what
+	name: (node) => @value node -- here
+	-- comment me
+-- okay
+
+
+x = { :something, something: something }
+
+y = {
+	:hi, :there, :how, :you
+	:thing
+}
+
+call_me "hello", :x, :y, :z
+
+t = {
+	a: 'a'
+	[b]: 'b'
+}
+
+xam = {
+	hello: 1234
+	"hello": 12354
+	[[hello]]: 12354
+	["hello"]: 12354
+	[ [[hello]] ]: 12354
+}
+
+
+kam = {
+	hello: 12
+	goodcheese:
+		"mmm"
+
+	yeah:
+		12 + 232
+
+	lets:
+		keepit going: true,
+			okay: "yeah"
+
+	more:
+		{
+			1, [x for x=1,10]
+		}
+
+	[{"one", "two"}]:
+		one_thing =>
+}
+
+-- both of these have desirable output
+keepit going: true,
+	okay: "yeah",
+	workd: "okay"
+
+thing what:
+	"great", no:
+		"more"
+					okay: 123
+
+
+-- 
+thing what:
+	"great", no:
+		"more"
+_ = okay: 123 -- a anon table
+
+
+-- 
+
+k = { "hello": "world" }
+k = { 'hello': 'world' }
+k = { "hello": 'world', "hat": "zat" }
+
+please "hello": "world"
+k = "hello": "world", "one": "zone"
+
+f1, f2, f3 = "one", "two": three, "four"
+f1, f2 = "two": three, "four"
+f1 = { "one", "two": three, "four" }
+
+
+j1, j2, j3, j4 = "one", "two": three, "four": five, 6, 7
+
+heroine =
+	name: "Christina"
+	age: 18
+	job: "Princess"
+	likes:
+		* name: "kittens"
+			img: "/image/kittens.png"
+		* name: "flower"
+			img: "/image/flower.png"
+	items:
+		* name: "ring"
+			amount: 2
+		* name: "necklace"
+			amount: 1
+	status:
+		desc: "weak"
+		* attribute: "health"
+			value: 50
+		* attribute: "mana"
+			value: 100
+
+inventory =
+	equipment:
+		* "sword"
+		* "shield"
+	items:
+		* name: "potion"
+			count: 10
+		* name: "bread"
+			count: 3
+
+items =
+	* func!
+	* with tb
+		.abc = 123
+	* {1, 2, 3}
+	* f {1, 2, 3}
+	* f
+		* 1
+		* 2
+		* 3
+	* [i for i = 1, 3]
+	* "#{if a then b}"
+
+pairs =
+	*
+		* "king"
+		* "queen"
+	*
+		* "hero"
+		* "princess"
+
+items =
+	*
+		name: "ring"
+		amount: 2
+	*
+		name: "necklace"
+		amount: 1
+
+menus =
+	* text: "Save"
+		sub:
+			* text: "Slot 1: " .. (slots[1].name or "None")
+				click: ->
+			* text: {"Slot 2"}
+				click: ->
+			* text: [[Slot 3]]
+				click: ->
+			* text: ("Slot 4")\name!
+				click: ->
+			* text: ({{"slot5"}})[1]\name!
+				click: ->
+			[6]: {
+				text: ("Slot 6")
+				click: ->
+			}
+
+_ =
+	boolean:
+		- true
+		- false
+	float:
+		- 3.14
+		- -6.8523015e+5
+	int:
+		- 123
+		- -0b1010_0111_0100_1010_1110
+	null:
+		nodeName: 'node'
+		parent: nil
+	string:
+		- 'Hello world'
+		- "newline
+newline2"
+
+tb = {...other}
+
+tbMix = {
+	1, 2, 3
+	... with item
+		.x = 1
+		\func!
+	"a", "b", "c"
+	...func?!
+	key: "value"
+	... -- perform the Lua table behavior here
+}
+
+do tbMixA = {
+	...[i for i = 1, 10]
+	11
+}
+
+do tbMixA = [
+	...[i for i = 1, 10]
+	11
+]
+
+do tbMixB = {
+	... ... -- only the first item in vararg been accessed here
+	... {...}
+	... {......}
+	1, 2, 3
+}
+
+do tbMixB = [
+	... ... -- only the first item in vararg been accessed here
+	... {...}
+	... {......}
+	1, 2, 3
+]
+
+const template = {
+	foo: "Hello"
+	bar: "World"
+	baz: "!"
+}
+
+const specialized = {
+	...template
+	bar: "Bob"
+}
+
+specializedB = {
+	function: ->
+	...template
+	end: ->
+	if: true
+	else: false
+}
+
+parts =
+	* "shoulders"
+	* "knees"
+
+lyrics =
+	* "head"
+	* ...parts
+	* "and"
+	* "toes"
+
+tbBlock =
+	sub:
+		:value
+		* ...items
+		* ...
+
+func
+	* ...items
+	:value
+	* ...
+	k: v
+	* ...
+
+nil
+

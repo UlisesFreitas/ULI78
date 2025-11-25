@@ -1,0 +1,381 @@
+import "macro_export" as {
+	$, -- import all macros
+	$config: $myconfig, -- rename macro $config to $myconfig
+}
+
+import "macro_todo" as $
+
+macro not_leak = -> "leak"
+do
+	macro x = -> 123
+	print $x
+	do
+		macro x = -> math.pi * 2
+		print $x
+	macro x = -> 456
+	print $x
+
+	import "macro_todo" as $todo: $not_leak
+	$not_leak "todo in a do block"
+
+$not_leak!!
+
+macro WindowFlag = $enum(
+	NoNav
+	NoDecoration
+	NoTitleBar
+	NoResize
+	NoMove
+	NoScrollbar
+	NoScrollWithMouse
+	NoCollapse
+	AlwaysAutoResize
+	NoSavedSettings
+	NoInputs
+	MenuBar
+	HorizontalScrollbar
+	NoFocusOnAppearing
+	NoBringToFrontOnFocus
+	AlwaysVerticalScrollbar
+	AlwaysHorizontalScrollbar
+	NoNavInputs
+	NoNavFocus
+	UnsavedDocument
+)
+
+print $WindowFlag AlwaysAutoResize
+print $WindowFlag(
+	NoNav
+	NoDecoration
+	NoTitleBar
+	NoResize
+	NoMove
+	NoScrollbar
+)
+
+macro NumAndStr = (num, str) ->
+	unless $is_ast(Num, num) and $is_ast SingleString, str
+		error "got unexpected token"
+	"[#{num}, #{str}]"
+
+print $NumAndStr 123, 'xyz'
+
+macro NumAndStr2 = (num`Num, str`SingleString) -> |
+	[#{num}, #{str}]
+
+print $NumAndStr2 456, 'abc'
+
+$asserts item == nil
+
+$myconfig false
+
+v = $assert item == nil
+
+macro and = (...)->
+	values = [value for value in *{...}]
+	$showMacro "and", "#{ table.concat values, " and " }"
+
+if $and f1!
+	print "OK"
+
+if $and f1!, f2!, f3!
+	print "OK"
+
+item = $copy(
+	@
+	{pos: {}, flags: flags::tonumber!}
+	id
+	connections
+	pos.x
+	pos.y
+	pos.z
+)
+
+macro in = (target, ...)->
+	values = [value for value in *{...}]
+	$showMacro "in", table.concat ["#{target} == #{item}" for item in *values], " or "
+
+if x |> $in "Apple", "Pig", "Dog"
+	print "exist"
+
+macro map = (items, action)->
+	$showMacro "map", "[#{action} for _ in *#{items}]"
+
+macro filter = (items, action)->
+	$showMacro "filter", "[_ for _ in *#{items} when #{action}]"
+
+macro reduce = (items, def, action)->
+	$showMacro "reduce", |
+		if ##{items} == 0
+			#{def}
+		else
+			_1 = #{def}
+			for _2 in *#{items}
+				_1 = #{action}
+			_1
+
+macro foreach = (items, action)->
+	$showMacro "foreach", "for _ in *#{items}
+	#{action}"
+
+macro pipe = (...)->
+	switch select "#", ...
+		when 0 then return ""
+		when 1 then return ...
+	ops = {...}
+	last = ops[1]
+	stmts = for i = 2, #ops
+		stmt = "\tlocal _#{i} = #{last} |> #{ops[i]}"
+		last = "_#{i}"
+		stmt
+	res = "do
+#{table.concat stmts, "\n"}
+	#{last}"
+	$showMacro "pipe", res
+
+{1,2,3} |> $map(_ * 2) |> $filter(_ > 4) |> $foreach print _
+
+$foreach $filter($map({1,2,3}, _ * 2), _ > 4), print _
+
+val = $pipe(
+	{1, 2, 3}
+	[[$map(_ * 2)]]
+	[[$filter(_ > 4)]]
+	[[$reduce(0, _1 + _2)]]
+)
+
+macro plus = (a, b)-> "#{a} + #{b}"
+
+$plus(1,2)\call 123
+
+res = 1 |> $plus 2
+
+macro curry = (...)->
+	args = {...}
+	len = #args
+	body = args[len]
+	def = table.concat ["(#{args[i]})->" for i = 1, len - 1]
+	"#{def}\n#{body\gsub "^do%s*\n",""}"
+
+f = $curry x,y,z,do
+	print x,y,z
+
+macro get_inner = (var)-> |
+	do
+		a = 1
+		a + 1
+
+macro get_inner_hygienic = (var)-> |
+	(->
+		local a = 1
+		a + 1)!
+
+do
+	a = 8
+	a = $get_inner!
+	a += $get_inner!
+	print a
+
+do
+	a = 8
+	a = $get_inner_hygienic!
+	a += $get_inner_hygienic!
+	print a
+
+macro lua = (code)-> {
+	:code
+	type: "lua"
+}
+
+x = 0
+
+$lua [[
+local function f(a)
+	return a + 1
+end
+x = x + f(3)
+]]
+
+$lua[[
+function tb:func()
+	print(123)
+end
+]]
+
+print x
+
+import "yue"
+macro lua = (code`YAMLMultiline) -> {
+	code: yue.loadstring(code)!
+	type: "lua"
+}
+
+$lua |
+	local function f2(a)
+		return a + 1
+	end
+	x = x + f2(3)
+
+macro def = (fname, ...)->
+	args = {...}
+	last = table.remove args
+	{
+		code: $showMacro "def", "local function #{fname}(#{table.concat args, ', '})
+	#{last}
+end"
+		type: "lua"
+	}
+
+sel = (a, b, c)-> if a then b else c
+
+$def sel, a, b, c, [[
+	if a then
+		return b
+	else
+		return c
+	end
+]]
+
+$def dummy,[[]]
+
+macro insertComment = (text)-> {
+	code: "-- #{text\match '[\'"](.*)[\'"]'}"
+	type: "lua"
+}
+
+$insertComment "a comment here"
+
+import 'underscore' as _
+
+macro chain = (...)->
+	callable = nil
+	for item in *{...}
+		callable = callable? and "(#{callable})\\#{item}" or item
+	$showMacro "chain", callable
+
+a = $chain(
+	_{1, 2, 3, 4, -2, 3}
+	chain!
+	map => @ * 2
+	filter => @ > 3
+	value!
+)
+
+$chain(
+	_{1, 2, 3, 4, -2, 3}
+	chain!
+	map => @ * 2
+	filter => @ > 3
+	each => print @
+)
+
+result = $chain(
+	origin.transform.root.gameObject\Parents!
+	Descendants!
+	SelectEnable!
+	SelectVisible!
+	TagEqual "fx"
+	Where (x) -> x.name\EndsWith "(Clone)"
+	Destroy!
+)
+
+macro chainB = (...)->
+	switch select "#", ...
+		when 0 then return ""
+		when 1 then return ...
+	items = {...}
+	last = nil
+	stmts = for i = 1,#items
+		stmt = if i == #items
+			lastStr = last and "#{last}\\" or ""
+			"\t#{lastStr}#{items[i]}"
+		else
+			lastStr = last and "#{last}\\" or ""
+			"\tlocal _#{i} = #{lastStr}#{items[i]}"
+		last = "_#{i}"
+		stmt
+	res = "do
+#{table.concat stmts, '\n'}
+"
+	$showMacro "chainB", res
+
+$chainB(
+	origin.transform.root.gameObject\Parents!
+	Descendants!
+	SelectEnable!
+	SelectVisible!
+	TagEqual "fx"
+	Where (x) -> x.name\EndsWith "(Clone)"
+	Destroy!
+)
+
+macro chainC = (...)->
+	import "yue" as {:to_lua}
+	callable = nil
+	config = {
+		implicit_return_root: false
+		reserve_line_number: false
+	}
+	for item in *{...}
+		itemCodes = to_lua(item,config)\gsub '%s*$',''
+		if callable?
+			callable = "#{callable}:#{itemCodes}"
+		else
+			callable = itemCodes
+	{
+		code: $showMacro "chainC", callable
+		type: "lua"
+	}
+
+$chainC(
+	origin.transform.root.gameObject\Parents!
+	Descendants!
+	SelectEnable!
+	SelectVisible!
+	TagEqual "fx"
+	Where (x) -> x.name\EndsWith "(Clone)"
+	Destroy!
+)
+
+macro tb = -> |
+	{
+		'abc'
+		a: 123
+		<call>: => 998
+	}
+
+print $tb[1], $tb.a, ($tb)!, $tb!
+
+print "current line: #{ $LINE }"
+
+$todo
+
+macro skip = -> ""
+
+do
+	print 1
+	<- $skip
+	print 2
+	print 3
+
+macro skip = -> "while false do break"
+
+_1 = ->
+	print 1
+	<- $skip
+	print 2
+	print 3
+
+do
+	macro foo = -> code: "tb:func(123)", type: "lua"
+	f = ->
+		x = $foo\bar 456
+		$foo!
+	f1 = ->
+		$foo!
+		return
+
+macro implicitReturnMacroIsAllowed = -> "print 'abc'\n123"
+
+$implicitReturnMacroIsAllowed
+

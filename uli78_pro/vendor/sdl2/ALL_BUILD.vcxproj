@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C2B920AE-CF90-3160-BC8C-2255DE941117}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="U:\tic80\ULI78\vendor\sdl2\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule U:/tic80/ULI78/vendor/sdl2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SU:/tic80/ULI78 -BU:/tic80/ULI78/uli78_pro --check-stamp-file U:/tic80/ULI78/uli78_pro/vendor/sdl2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceRuns.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLanguage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckSourceRuns.cmake;U:\tic80\ULI78\uli78_pro\vendor\sdl2\SDL_config.h.intermediate;U:\tic80\ULI78\vendor\sdl2\SDL2.spec.in;U:\tic80\ULI78\vendor\sdl2\cmake\CheckCPUArchitecture.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\macros.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlchecks.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlfind.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlplatform.cmake;U:\tic80\ULI78\vendor\sdl2\include\SDL_config.h.cmake;U:\tic80\ULI78\vendor\sdl2\include\SDL_revision.h.cmake;U:\tic80\ULI78\vendor\sdl2\sdl2-config.in;U:\tic80\ULI78\vendor\sdl2\sdl2.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">U:\tic80\ULI78\uli78_pro\vendor\sdl2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule U:/tic80/ULI78/vendor/sdl2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SU:/tic80/ULI78 -BU:/tic80/ULI78/uli78_pro --check-stamp-file U:/tic80/ULI78/uli78_pro/vendor/sdl2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceRuns.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLanguage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckSourceRuns.cmake;U:\tic80\ULI78\uli78_pro\vendor\sdl2\SDL_config.h.intermediate;U:\tic80\ULI78\vendor\sdl2\SDL2.spec.in;U:\tic80\ULI78\vendor\sdl2\cmake\CheckCPUArchitecture.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\macros.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlchecks.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlfind.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlplatform.cmake;U:\tic80\ULI78\vendor\sdl2\include\SDL_config.h.cmake;U:\tic80\ULI78\vendor\sdl2\include\SDL_revision.h.cmake;U:\tic80\ULI78\vendor\sdl2\sdl2-config.in;U:\tic80\ULI78\vendor\sdl2\sdl2.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">U:\tic80\ULI78\uli78_pro\vendor\sdl2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule U:/tic80/ULI78/vendor/sdl2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SU:/tic80/ULI78 -BU:/tic80/ULI78/uli78_pro --check-stamp-file U:/tic80/ULI78/uli78_pro/vendor/sdl2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceRuns.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLanguage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckSourceRuns.cmake;U:\tic80\ULI78\uli78_pro\vendor\sdl2\SDL_config.h.intermediate;U:\tic80\ULI78\vendor\sdl2\SDL2.spec.in;U:\tic80\ULI78\vendor\sdl2\cmake\CheckCPUArchitecture.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\macros.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlchecks.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlfind.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlplatform.cmake;U:\tic80\ULI78\vendor\sdl2\include\SDL_config.h.cmake;U:\tic80\ULI78\vendor\sdl2\include\SDL_revision.h.cmake;U:\tic80\ULI78\vendor\sdl2\sdl2-config.in;U:\tic80\ULI78\vendor\sdl2\sdl2.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">U:\tic80\ULI78\uli78_pro\vendor\sdl2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule U:/tic80/ULI78/vendor/sdl2/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SU:/tic80/ULI78 -BU:/tic80/ULI78/uli78_pro --check-stamp-file U:/tic80/ULI78/uli78_pro/vendor/sdl2/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeParseArguments.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCSourceRuns.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckIncludeFiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLanguage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CheckSourceRuns.cmake;U:\tic80\ULI78\uli78_pro\vendor\sdl2\SDL_config.h.intermediate;U:\tic80\ULI78\vendor\sdl2\SDL2.spec.in;U:\tic80\ULI78\vendor\sdl2\cmake\CheckCPUArchitecture.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\macros.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlchecks.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlfind.cmake;U:\tic80\ULI78\vendor\sdl2\cmake\sdlplatform.cmake;U:\tic80\ULI78\vendor\sdl2\include\SDL_config.h.cmake;U:\tic80\ULI78\vendor\sdl2\include\SDL_revision.h.cmake;U:\tic80\ULI78\vendor\sdl2\sdl2-config.in;U:\tic80\ULI78\vendor\sdl2\sdl2.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">U:\tic80\ULI78\uli78_pro\vendor\sdl2\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="U:\tic80\ULI78\uli78_pro\ZERO_CHECK.vcxproj">
+      <Project>{DADB01E1-F41C-3D39-8402-5FE8547235AA}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="U:\tic80\ULI78\uli78_pro\vendor\sdl2\SDL2.vcxproj">
+      <Project>{16482870-72A4-36BE-8049-FCA022D44C39}</Project>
+      <Name>SDL2</Name>
+    </ProjectReference>
+    <ProjectReference Include="U:\tic80\ULI78\uli78_pro\vendor\sdl2\SDL2-static.vcxproj">
+      <Project>{7B82760A-534C-3701-892C-3272F5A95AA7}</Project>
+      <Name>SDL2-static</Name>
+    </ProjectReference>
+    <ProjectReference Include="U:\tic80\ULI78\uli78_pro\vendor\sdl2\SDL2_test.vcxproj">
+      <Project>{0FE2449E-8EE0-3814-8C79-A63C491ACAB4}</Project>
+      <Name>SDL2_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="U:\tic80\ULI78\uli78_pro\vendor\sdl2\SDL2main.vcxproj">
+      <Project>{092B14E7-EAF1-3A7C-B882-047645919484}</Project>
+      <Name>SDL2main</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

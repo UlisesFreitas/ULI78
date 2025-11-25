@@ -1,0 +1,227 @@
+
+
+x = -> print what
+
+_ = ->
+
+_ = -> -> ->
+
+go to the barn
+
+open -> the -> door
+
+open ->
+	the door
+	hello = ->
+		my func
+
+h = -> hi
+
+eat ->, world
+
+
+(->)()
+
+x = (...) ->
+
+hello!
+hello.world!
+
+_ = hello!.something
+_ = what!["ofefe"]
+
+what! the! heck!
+
+_ = (a,b,c,d,e) ->
+
+_ = (a,a,a,a,a) ->
+	print a
+
+_ = (x=23023) ->
+
+_ = (x=(y=()->) ->) ->
+
+_ = (x = if something then yeah else no) ->
+
+something = (hello=100, world=(x=[[yeah cool]])-> print "eat rice") ->
+	print hello
+
+_ = () =>
+_ = (x, y) =>
+_ = (@x, @y) =>
+_ = (x=1) =>
+_ = (@x=1,y,@z="hello world") =>
+
+
+x -> return
+y -> return 1
+z -> return 1, "hello", "world"
+k -> if yes then return else return
+
+_ = -> real_name if something
+
+--
+
+d(
+	->
+		print "hello world"
+	10
+)
+
+
+
+d(
+	1,2,3
+	4
+	5
+	6
+
+	if something
+		print "okay"
+		10
+
+	10,20
+)
+
+
+f(
+	
+	)(
+	
+	)(
+		what
+	)(->
+		print "srue"
+	123)
+
+--
+
+x = (a,
+	b) ->
+	 print "what"
+
+
+y = (a="hi",
+	b=23) ->
+		print "what"
+
+z = (
+	a="hi",
+	b=23) ->
+		print "what"
+
+
+j = (f,g,m,
+	a="hi",
+	b=23
+) ->
+		print "what"
+
+
+y = (a="hi",
+	b=23,
+	...) ->
+		print "what"
+
+
+y = (a="hi",
+	b=23,
+	...
+) ->
+		print "what"
+
+--
+
+args = (a
+	b) ->
+		print "what"
+
+
+args = (a="hi"
+	b=23) ->
+		print "what"
+
+args = (
+	a="hi"
+	b=23) ->
+		print "what"
+
+
+args = (f,g,m
+	a="hi"
+	b=23
+) ->
+		print "what"
+
+
+@ = (n)->
+	return 1 if n == 0
+	n * @(n-1)
+
+do
+	items.every (item) ->
+		if item.field
+			value = item.field.get "abc"
+			if value
+				switch value\get!
+					when 123
+						return false
+					when 456
+						handle item
+		true
+
+	items.every (item): true ->
+		if item.field
+			value = item.field.get "abc"
+			if value
+				switch value\get!
+					when 123
+						return false
+					when 456
+						-- prevent implicit return for next line
+						handle item
+
+	HttpServer\post "/login", (req): success: false ->
+		switch req when {:name, :pwd}
+			if name ~= ""
+				if user := DB\queryUser name, pwd
+					if user.status == "available"
+						return success: true
+
+	check = (num) -> return num
+	-- func without implicit return
+	func = (): -> check 123
+	print func! -- get nil
+
+do
+	f = ({:a, :b, :c}) -> print a, b, c
+	f = (:a, :b, :c) -> print a, b, c
+	g = (x, :y) -> print x, y
+	i = ({a: ax = 0, b: by = 0}) -> print ax, by
+	j = (name, {id: uid = "n/a", :role = "guest"}) -> print name, uid, role
+	m = ({user: {:name, :age}, meta: {:ver = 1}}) -> print name, age, ver
+	m1 = ({user: {:name, :age}, :meta = {}}) -> print name, age, meta and meta.ver or "nil"
+	new = ({:name = "anon", :age = 0}) =>
+		@name = name
+		@age  = age
+	set = ({:name = @name, :age = @age}) =>
+		@name = name
+		@age = age
+	logKV = ({:k, :v}, ...) ->
+		print "kv:", k, v
+		print "rest count:", select "#", ...
+	macro gen = (fname) -> |
+	  #{fname} = ({:a, :b = 0}) -> print a, b
+	$gen foo
+	t1 = (:a, x) -> print a, x
+	t2 = (:a) -> print a
+	w = (
+		id
+		{:x = 0, :y = 0}
+		:flag
+	) ->
+		print id, x, y, flag
+	g1 = ({:a, a: ax}) -> print a, ax
+	g4 = ({:a, :b, ...rest}) -> print a, b
+
+nil

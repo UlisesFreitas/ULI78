@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\x64\MinSizeRel\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\vendor\sdl2\x64\MinSizeRel\sdl_headers_copy</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\SDL2.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\bin2txt.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\cart2prj.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\localplayer-sdl.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\player-sdl.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\prj2cart.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\uli78.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\wasmp2cart.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\bin\xplode.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>U:\tic80\ULI78\uli78_pro\x64\MinSizeRel\ALL_BUILD</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

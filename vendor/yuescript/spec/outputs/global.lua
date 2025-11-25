@@ -1,0 +1,120 @@
+do
+	a, b, c = 223, 343, nil
+	cool = "dad"
+end
+do
+	local _class_0
+	local _base_0 = {
+		umm = "cool"
+	}
+	if _base_0.__index == nil then
+		_base_0.__index = _base_0
+	end
+	_class_0 = setmetatable({
+		__init = function() end,
+		__base = _base_0,
+		__name = "Something"
+	}, {
+		__index = _base_0,
+		__call = function(cls, ...)
+			local _self_0 = setmetatable({ }, _base_0)
+			cls.__init(_self_0, ...)
+			return _self_0
+		end
+	})
+	_base_0.__class = _class_0
+	Something = _class_0
+end
+do
+	local d
+	a, b, c, d = "hello", nil, nil, nil
+end
+do
+	local What
+	if this then
+		What = 232
+	else
+		What = 4343
+	end
+	local another = 3434
+	Another = 7890
+	if inner then
+		local Yeah = "10000"
+	end
+	if this then
+		What = 232
+	else
+		What = 4343
+	end
+end
+do
+	if this then
+		What = 232
+	else
+		What = 4343
+	end
+	x, y, z = 1, 2, 3
+	y = function()
+		local hallo = 3434
+	end
+	do
+		local _with_0 = tmp
+		local j = 2000
+	end
+end
+do
+	x = 3434
+	if y then
+		x = 10
+	end
+end
+do
+	if y then
+		local x = 10
+	end
+	x = 3434
+end
+do
+	do
+		k = 1212
+		do
+			local h = 100
+		end
+		y = function()
+			local h = 100
+			k = 100
+		end
+	end
+	local h = 100
+end
+do
+	x = y
+	local foobar = "all lowercase"
+	FooBar = "pascal case"
+	FOOBAR = "all uppercase"
+end
+do
+	do
+		local _class_0
+		local _base_0 = { }
+		if _base_0.__index == nil then
+			_base_0.__index = _base_0
+		end
+		_class_0 = setmetatable({
+			__init = function() end,
+			__base = _base_0,
+			__name = "A"
+		}, {
+			__index = _base_0,
+			__call = function(cls, ...)
+				local _self_0 = setmetatable({ }, _base_0)
+				cls.__init(_self_0, ...)
+				return _self_0
+			end
+		})
+		_base_0.__class = _class_0
+		A = _class_0
+	end
+	Flag = 1
+	const, x, y = "const", 1, 2
+end

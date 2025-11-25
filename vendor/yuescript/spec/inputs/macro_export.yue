@@ -1,0 +1,69 @@
+import "macro_todo" as $
+
+import "macro_todo" as {$, :$todo}
+
+export macro config = (debugging = true)->
+	global debugMode = debugging == "true"
+	global debugMacro = true
+	""
+
+export macro showMacro = (name, res)->
+	if debugMacro then |
+		do
+			txt = #{res}
+			print '[macro #{name}]'
+			print txt
+			txt
+	else
+		res
+
+export macro asserts = (cond)->
+	if debugMode
+		$showMacro "assert", "assert #{cond}"
+	else
+		""
+
+export macro assert = (cond)->
+	if debugMode
+		$showMacro "assert", "assert #{cond}"
+	else
+		"#{cond}"
+
+export macro copy = (src, dst, ...)->
+	assert(
+		src != "_src_" and src != "_dst_" and dst != "_src_" and dst != "_dst_"
+		"copy targets can not be _src_ or _dst_"
+	)
+	copyFields = table.concat(
+		["_dst_.#{field} = _src_.#{field}" for field in *{...}]
+		"\n\t\t\t"
+	)
+	|
+		do
+			local _src_, _dst_
+			with _dst_ := #{dst}
+				with _src_ := #{src}
+					#{copyFields}
+
+export macro enum = (...) ->
+	items = {...}
+	items = [item\gsub('"', '') for item in *items]
+	itemSet = {item, true for item in *items}
+	(...) ->
+		count = select "#", ...
+		if 1 < count
+			result = "["
+			for i = 1, count
+				item = select i, ...
+				error "got \"#{item}\", expecting one of #{table.concat items, ', '}" unless itemSet[item]
+				result ..= "\"#{item}\","
+			result .. "]"
+		else
+			item = select 1, ...
+			error "got \"#{item}\", expecting one of #{table.concat items, ', '}" unless itemSet[item]
+			"\"#{item}\""
+
+$ ->
+	global debugMode = true
+	global debugMacro = true
+

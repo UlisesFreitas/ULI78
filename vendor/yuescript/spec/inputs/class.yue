@@ -1,0 +1,260 @@
+
+class Hello
+	new: (@test, @world) =>
+		print "creating object.."
+	hello: =>
+		print @test, @world
+	__tostring: => "hello world"
+
+x = Hello 1,2
+x\hello()
+
+print x
+
+class Simple
+	cool: => print "cool"
+
+class Yikes extends Simple
+	new: => print "created hello"
+
+x = Yikes()
+x\cool()
+
+
+class Hi
+	new: (arg) =>
+		print "init arg", arg
+
+	cool: (num) =>
+		print "num", num
+
+
+class Simple extends Hi
+	new: => super "man"
+	cool: => super 120302
+
+x = Simple()
+x\cool()
+
+print x.__class == Simple
+
+
+class Okay
+	-- what is going on
+	something: 20323
+	-- yeaha
+
+
+class Biggie extends Okay
+	something: =>
+		super 1,2,3,4
+		super.something another_self, 1,2,3,4
+		assert super == Okay
+
+
+class Yeah
+	okay: =>
+		super\something 1,2,3,4
+
+
+class What
+	something: => print "val:", @val
+
+class Hello extends What
+	val: 2323
+	something: => super\something
+
+with Hello!
+	x = \something!
+	print x
+	x!
+
+class CoolSuper
+	hi: =>
+		super(1,2,3,4) 1,2,3,4
+		super.something 1,2,3,4
+		_ = super.something(1,2,3,4).world
+		super\yeah"world".okay hi, hi, hi
+		_ = something.super
+		_ = super.super.super.super
+		_ = super\hello
+		nil
+
+
+-- selfing
+x = @hello
+x = @@hello
+
+@hello "world"
+@@hello "world"
+
+@@one @@two(4,5) @three, @four
+
+xx = (@hello, @@world, cool) ->
+
+
+-- class properties
+class ClassMan
+	@yeah: 343
+	blue: =>
+	@hello: 3434, @world: 23423
+	green: =>
+	@red: =>
+
+
+x = @
+y = @@
+
+@ something
+
+@@ something
+
+@ = @ + @ / @
+
+@ = 343
+@.hello 2,3,4
+
+_ = hello[@].world
+
+
+class Whacko
+	_ = @hello
+	if something
+		print "hello world"
+
+	hello = "world"
+	@another = "day"
+
+	print "yeah" if something -- this is briken
+
+
+print "hello"
+
+yyy = ->
+	class Cool
+		_ = nil
+
+
+--
+
+class a.b.c.D
+	_ = nil
+
+
+class a.b["hello"]
+	_ = nil
+
+class (-> require "moon")!.Something extends Hello.World
+	_ = nil
+
+--
+
+a = class
+b = class Something
+c = class Something extends Hello
+d = class extends World
+
+print (class WhatsUp).__name
+
+--
+
+global ^
+class Something
+	_ = nil
+
+
+--
+
+-- hoisting
+class Something
+	val = 23
+	{:insert} = table
+	new: => print insert, val -- prints nil 23
+
+--
+
+class X
+	new: hi
+
+
+--
+
+class Cool extends Thing
+	dang: =>
+		{
+			hello: -> super!
+			world: -> super.one
+		}
+
+-- 
+
+class Whack extends Thing
+	dang: do_something =>
+		super!
+
+---
+
+class Wowha extends Thing
+	@butt: ->
+		super!
+		_ = super.hello
+		super\hello!
+		super\hello
+
+
+	@zone: cool {
+		->
+			super!
+			_ = super.hello
+			super\hello!
+			super\hello
+	}
+
+do
+	class Test
+		new: => @@if = true
+		@do: => 1
+		test: => @@if and @@do!
+	test = Test!
+	test\test!
+
+do
+	class Test
+		new: => @if = true
+		do: => 1
+		test: => @if and @do!
+	test = Test!
+	test\test!
+
+class extends lapis.Application
+	"/": => json: { status: true }
+
+class A using B, C, D, {value: 123}
+
+class Example
+	@field1 = 1
+	@field2 = @field1 + 1
+
+class Foo
+	new: (x) => @x = x
+	<mul>: (y) => @x * y
+	<"dsd-dsd">: 123
+	:add
+	:<add>
+
+do
+	global xa, xb
+	class CX
+		xa = 1
+		xb = 1
+		new: =>
+
+do
+	class CY
+		xa = 1
+		local xb = 2
+		new: => print xa, xb, xc, xd
+		const xc = 3
+		close xd = <close>: =>
+
+nil

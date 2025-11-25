@@ -1,0 +1,270 @@
+
+hi = [x*2 for _, x in ipairs{1,2,3,4}]
+
+items = {1,2,3,4,5,6}
+
+_ = [z for z in ipairs items when z > 4]
+
+rad = [{a} for a in ipairs {
+	 1,2,3,4,5,6,
+} when good_number a]
+
+
+_ = [z for z in items for j in list when z > 4]
+
+require "util"
+
+dump = (x) -> print util.dump x
+
+range = (count) ->
+	i = 0
+	return coroutine.wrap ->
+		while i < count
+			coroutine.yield i
+			i = i + 1
+
+dump [x for x in range 10]
+dump [{x, y} for x in range 5 when x > 2 for y in range 5]
+
+things = [x + y for x in range 10 when x > 5 for y in range 10 when y > 7]
+
+print x,y for x in ipairs{1,2,4} for y in ipairs{1,2,3} when x != 2
+
+print "hello", x for x in items
+
+_ = [x for x in x]
+x = [x for x in x]
+
+print x,y for x in ipairs{1,2,4} for y in ipairs{1,2,3} when x != 2
+
+double = [x*2 for x in *items]
+
+print x for x in *double
+
+cut = [x for x in *items when x > 3]
+
+hello = [x + y for x in *items for y in *items]
+
+print z for z in *hello
+
+
+-- slice
+x = {1, 2, 3, 4, 5, 6, 7}
+print y for y in *x[2,-5,2]
+print y for y in *x[,3]
+print y for y in *x[2,]
+print y for y in *x[,,2]
+print y for y in *x[2,,2]
+
+a, b, c = 1, 5, 2
+print y for y in *x[a,b,c]
+
+
+normal = (hello) ->
+	[x for x in yeah]
+
+
+test = x 1,2,3,4,5
+print thing for thing in *test
+
+_ = -> a = b for row in *rows
+
+with tb
+	f [a] -- indexing
+	f [a,] -- list with one element
+	print v for v in *f[a,] -- table slicing in for-loop
+	f [] -- empty list
+	f[] = x -- table appending to f
+	[a] = x -- assign to tb[a]
+	[a,] = x -- list destructuring for x
+	[] = x -- table appending to tb
+	c = a in [1] -- check if a in tb[1]
+	c = a in [1,] -- check if a == 1
+	c = a in {1} -- check if a == 1
+	c = a in {1,} -- check if a == 1
+
+do
+	[a, b] = hello
+	[name = "nameless", job = "jobless"] = person
+
+do
+	transactions = ["T001", "T002", "T003", "T004", "T005"]
+	middleTransactions = transactions[2, -2]
+	print middleTransactions -- => {"T002", "T003", "T004"}
+
+do
+	logs =
+		- start: 0, end: 100
+		- start: 100, end: 200
+		- start: 200, end: 123
+	print logs[#].end -- => 123
+
+do
+	pendingOrders = ["O001", "O002", "O003", "O004"]
+	print pendingOrders[# - 1] -- => "O003"	
+
+do
+	getOrders = ->
+		{
+			{ id: "O1001", status: "pending" }
+			{ id: "O1002", status: "processing" }
+			{ id: "O1003", status: "done" }
+		}
+
+	lastStatus = getOrders()[#].status
+	assert lastStatus == "done"
+
+do
+	cloneList1 = (list) -> list[,]
+	cloneList2 = (list) -> [...list,]
+	cloneTable = (tb) -> {...tb}
+
+do
+	print(
+		globalTB[#]
+		a.b.c[# - 2]
+		x?\y?!.z?[# - 3]
+	)
+
+do
+	f = ->
+		print(
+			globalTB[#]\end 123
+			a.b.c[5,-5][# - 2]
+			x?\y?!.z?[# - 3]?[, -3]
+		)
+
+do
+	tb = [1, 2, 3]
+	tb[#] = 40
+	tb[# - 1] = 20
+
+do
+	a = b = c = "x"
+	lst = []
+	lst[#] = a
+	lst[# - 1] = b
+
+do
+	x, y, z = 1, 2, 3
+	arr = []
+	arr[#], head = x, y
+	arr[#] = z
+
+do
+	triple = ["keep", "skip", "tail"]
+	[head, _, tailv] = triple
+	buf = []
+	buf[#] = head
+	buf[#] = tailv
+
+do
+	src = ["a", "", "c", nil, "d"]
+	collected = []
+	for item in *src
+		if item and #item > 0
+			collected[#] = item
+
+do
+	nums = [1, 2, 3, 4, 5]
+	last_two = [v for v in *nums when v > 3]
+	nums[#] = last_two[1]
+	nums[#] = last_two[2]
+
+do
+	store = []
+	store[#] = { meta: { id: 1, ok: true }, payload: [10, 20] }
+	store[#] = { meta: { id: 1, ok: false }, payload: [10, 20, 30] }
+
+do
+	f = ->
+		q = []
+		tb.tmp = [n for n = 1, 4]
+		if #tb.tmp >= 3
+			q[#] = {head: tb.tmp[1], tail: tb.tmp[#]}
+
+do
+	make_pair = (a, b) -> [a, b]
+	pairs = []
+	p1 = make_pair 7, 8
+	pairs[#] = p1
+	k, v = "key", 42
+	pairs[#] = {k: k, v: v}
+
+do
+	cfg = {mode: "safe", tags: []}
+	if cfg.mode == "safe"
+		cfg.mode = "fast"
+		cfg.tags[#] = "newbie"
+
+do
+	mat = [ [1,2], [3,4], [5,6]]
+	last_row = mat[#]
+	rows = []
+	rows[#] = last_row[1]
+
+do
+	kv = []
+	kv[#] = {k: "a", v: 1}
+	kv[#] = {k: "b", v: 2}
+	pair_last = kv[#]
+	dict = {}
+	dict[pair_last.k] = pair_last.v
+	dict[pair_last.k] = 3
+
+do
+	base = [ i for i = 1, 4 ]
+	pack = []
+	pack[#] = [ base[1], base[#] ]
+	pack[#] = { first: base[1], last: base[#] }
+
+do
+	opts = {limit: 10}
+	{:limit, :offset = 0} = opts
+	pages = []
+	pages[#] = {limit: limit, offset: offset}
+
+do
+	chain = { a: { b: { c: 0 } }, list: [ {x:0}, {x:0} ] }
+	chain.a.b.c = 1
+	chain.list[1].x = 10
+	chain.list[#].x = 20
+	chain.list[# - 1] = { x: 30 }
+
+do
+	node = {left: {v:0}, right: {v:0}}
+	bag = []
+	{ :left, :right } = node
+	bag[#], left.v, right.v = "k", 1, 2
+
+do
+	a1, a2, a3 = 100, 200, 300
+	mix = []
+	mix[#], mix[#], meta = a1, a2, {tag: "ok"}
+
+do
+	cfg2 = {limit: 5, opts: {flag: false}}
+	{limit: lim, opts: opt2} = cfg2
+	bucket = {xs: []}
+	bucket.xs[#], bucket.flag, opt2.flags[] = lim, true, 123
+
+do
+	ret2 = ()-> 7, 8
+	box = []
+	box[#], x1 = ret2!
+
+do
+	q = [1, 2]
+	lastq = q[#]
+	q[# - 1] = lastq * 10
+
+do
+	mat2 = [[9,8], [7,6]]
+	t = { hold: nil }
+	t.hold = mat2[#][1]
+
+do
+	f = -> globalTB[#][#] = 1
+	f1 = -> globalTB[#][# - 1]
+
+nil

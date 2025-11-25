@@ -1,0 +1,97 @@
+-a^2 in {1, 2, 3} |> f
+
+has = "foo" in { "bar", "foo" }
+
+if a in {1} and b in {2, 3, 4}
+	print a, b, c
+
+if a in [1,] and b in [2, 3, 4]
+	print a, b, c
+
+do
+	exist = item in list
+	check item in list
+
+do
+	item = get!
+	exist = item in list
+	check item in list
+
+do
+	item = get!
+	list = {1, 2, 3}
+	list = [1, 2, 3]
+	not_exist = item not in list
+	check item in list
+	check item in {1, 2, 3}
+	check item in [1, 2, 3]
+	check item(...) in {[1]: 1, [2]: 2, [3]: 3}
+
+do
+	check -> x in tb
+	check -> x not in tb
+	local x, tb
+	check -> return x in tb
+	check -> x not in tb
+
+do
+	f1 = ->
+		a = 2
+		a in [
+			1
+			2
+			3
+			4
+		]
+	f2 = ->
+		a not in [
+			1
+			2
+			3
+			4
+		]
+	f3 = ->
+		a = 2
+		a in { b, c, d
+			e, f
+			g
+		}
+	f4 = ->
+		a = 2
+		b = a in [ 1, 2
+			3, 4
+		]
+	f5 = ->
+		a = 2
+		return a in [ 1, 2
+			3, 4
+		]
+	f6 = ->
+		b = a not in {
+			1
+			2
+			x: 3
+		}
+	print a in []
+	a = 1
+	print a in {}
+
+do
+	a = 1
+	print a in [1, 2, 1]
+
+do
+	a = -1
+	print a in [-1, 11, 2, -1, 0, -1]
+
+do
+	a = 1
+	b = 1
+	print a in [b, 10, b]
+
+do
+	print x in ["", ""]
+	print 1 in [1, 2, 1]
+
+nil
+

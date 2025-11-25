@@ -1,0 +1,1 @@
+: foreach *.yue |> yue %f |> %B.lua
