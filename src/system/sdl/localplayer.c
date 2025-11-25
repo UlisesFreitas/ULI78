@@ -177,7 +177,7 @@ static void audioCallback(void* userdata, u8* stream, s32 len)
     SDL_UnlockMutex(state.mutex);
 }
 
-s32 runCart(void* cart, s32 size)
+s32 runCart(void* cart, s32 size, bool borderless)
 {
     s32 output = 0;
 
@@ -201,7 +201,10 @@ s32 runCart(void* cart, s32 size)
             return 1;
         }
 
-        SDL_Window* window = SDL_CreateWindow(ULI78_WINDOW_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ULI78_FULLWIDTH * ULI78_WINDOW_SCALE, ULI78_FULLHEIGHT * ULI78_WINDOW_SCALE, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+        u32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+        if(borderless) flags |= SDL_WINDOW_BORDERLESS;
+
+        SDL_Window* window = SDL_CreateWindow(ULI78_WINDOW_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ULI78_FULLWIDTH * ULI78_WINDOW_SCALE, ULI78_FULLHEIGHT * ULI78_WINDOW_SCALE, flags);
         if (!window)
         {
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "SDL Error", SDL_GetError(), NULL);
@@ -338,8 +341,16 @@ s32 runCart(void* cart, s32 size)
 
 s32 SDL_main(s32 argc, char** argv)
 {
+    bool borderless = true;
+
+    for(s32 i = 1; i < argc; i++)
+    {
+        if(strcmp(argv[i], "--windowed") == 0)
+            borderless = false;
+    }
+
     u8* cart = NULL;
     s32 size = 0;
     if (getCart(sanitize_path(argv[0]), &cart, &size) != 0) return 1;
-    return runCart(cart, size);
+    return runCart(cart, size, borderless);
 }
