@@ -1,10 +1,8 @@
-cd .\tic80\ULI78\uli78_pro\
 Remove-Item -Path .\* -Recurse -Force
 cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=MinSizeRel -DBUILD_SDLGPU=On -DBUILD_PRO=On -DBUILD_STATIC=On -DBUILD_TOOLS=On -DBUILD_PLAYER=On -DCMAKE_POLICY_VERSION_MINIMUM="3.5" ..
 cmake --build . --config MinSizeRel --target prj2cart
 cmake --build . --config MinSizeRel --target bin2txt
 cmake --build . --config MinSizeRel --target localplayer-sdl 
-
 cd ..
 .\assets.bat
 cd uli78_pro

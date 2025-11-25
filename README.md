@@ -379,15 +379,6 @@ sudo ln -s /usr/local/lib/dri/swrast_dri.so /usr/local/lib/dri-devel/
 
 ULI-78 can now be run with `uli78` (if installed) or `./uli78` (with no installation).
 
-## iOS / tvOS
-You can find iOS/tvOS version here
-- 0.60.3: https://github.com/brunophilipe/ULI-78
-- 0.45.0: https://github.com/CliffsDover/ULI-78
-
-## Android
-You can find the compiled version ready download and install [on F-Droid](https://f-droid.org/packages/com.uli78.uli/):  
-[<img alt="Get it on F-Droid" src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" width="256">](https://f-droid.org/packages/com.uli78.uli/)
-
 ## Credits
 * Filippo Rivato — [Twitter @HomineLudens](https://twitter.com/HomineLudens)
 * Fred Bednarski — [Twitter @FredBednarski](https://twitter.com/FredBednarski)
