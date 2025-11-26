@@ -38,8 +38,8 @@ static void reset(Start* start)
     s32 width = val * 2;
 
     // Dibuja dos rectángulos que se cierran hacia el centro.
-    uli_api_rect(start->uli, 0, 0, width, ULI78_HEIGHT, 14);
-    uli_api_rect(start->uli, ULI78_WIDTH - width, 0, width, ULI78_HEIGHT, 14);
+    uli_api_rect(start->uli, 0, 0, width, ULI78_HEIGHT, 10);
+    uli_api_rect(start->uli, ULI78_WIDTH - width, 0, width, ULI78_HEIGHT, 10);
 }
 
 static void drawHeader(Start* start)
@@ -53,7 +53,7 @@ static void drawHeader(Start* start)
 
 static void chime(Start* start)
 {
-    playSystemSfx(start->studio, 3);
+    playSystemSfx(start->studio, 1);
 }
 
 static void stop_chime(Start* start)
@@ -151,8 +151,7 @@ void initStart(Start* start, Studio* studio, const char* cart)
         strcpy(&start->text[i * STUDIO_TEXT_BUFFER_WIDTH], Header[i]);
 
     for(s32 i = 0; i < STUDIO_TEXT_BUFFER_SIZE; i++)
-        start->color[i] = CLAMP(((i % STUDIO_TEXT_BUFFER_WIDTH) + (i / STUDIO_TEXT_BUFFER_WIDTH)) / 2,
-            uli_color_black, uli_color_dark_grey);
+        start->color[i] = uli_color_white;
 
 #if defined(__EMSCRIPTEN__)
 

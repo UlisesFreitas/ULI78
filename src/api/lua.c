@@ -146,6 +146,36 @@ static const u8 DemoRom[] =
     #include "../build/assets/luademo.uli.dat"
 };
 
+static const u8 MarkRom[] =
+{
+    #include "../build/assets/luamark.uli.dat"
+};
+
+static const u8 DemoSfx[] =
+{
+    #include "../build/assets/sfx.uli.dat"
+};
+
+static const u8 DemoPalette[] =
+{
+    #include "../build/assets/palette.uli.dat"
+};
+
+static const u8 DemoFont[] =
+{
+    #include "../build/assets/font.uli.dat"
+};
+
+static const u8 DemoMusic[] =
+{
+    #include "../build/assets/music.uli.dat"
+};
+
+
+
+
+
+
 ULI_EXPORT const uli_script EXPORT_SCRIPT(Lua) =
 {
     .id                 = 10,
@@ -183,10 +213,14 @@ ULI_EXPORT const uli_script EXPORT_SCRIPT(Lua) =
     .keywordsCount      = COUNT_OF(LuaKeywords),
 
     .demo = {DemoRom, sizeof DemoRom},
+    .mark = {MarkRom, sizeof MarkRom, "luamark.uli"},
 
     .demos = (struct uli_demo[])
     {
-       
+        {DemoSfx,       sizeof DemoSfx,         "sfx.uli"},
+        {DemoPalette,   sizeof DemoPalette,     "palette.uli"},
+        {DemoFont,      sizeof DemoFont,        "font.uli"},
+        {DemoMusic,     sizeof DemoMusic,       "music.uli"},
         {0},
     },
 };

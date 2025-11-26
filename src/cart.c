@@ -188,6 +188,7 @@ void uli_cart_load(uli_cartridge* cart, const u8* buffer, s32 size)
 
             switch(chunk->type)
             {
+            // Aquí se cargan los TILES, SPRITES, MAP, SFX, etc. definidos en config.js
             case CHUNK_TILES:       LOAD_CHUNK(cart->banks[chunk->bank].tiles);             break;
             case CHUNK_SPRITES:     LOAD_CHUNK(cart->banks[chunk->bank].sprites);           break;
             case CHUNK_MAP:         LOAD_CHUNK(cart->banks[chunk->bank].map);               break;
@@ -198,6 +199,7 @@ void uli_cart_load(uli_cartridge* cart, const u8* buffer, s32 size)
             case CHUNK_FLAGS:       LOAD_CHUNK(cart->banks[chunk->bank].flags);             break;
             case CHUNK_SCREEN:      LOAD_CHUNK(cart->banks[chunk->bank].screen);            break;
             case CHUNK_LANG:        LOAD_CHUNK(cart->lang);                                 break;
+            // El código (<CODE>) se trata de forma especial, no se carga aquí directamente.
             case CHUNK_BINARY:
                 binary[chunk->bank] = (struct BinaryChunk){chunkSize(chunk), ptr};
                 break;
