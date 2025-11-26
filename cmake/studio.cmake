@@ -41,7 +41,8 @@ set(ULI78_OUTPUT uli78)
 
 add_library(uli78studio STATIC
     ${ULI78STUDIO_SRC}
-    ${CMAKE_SOURCE_DIR}/build/assets/cart.png.dat)
+    ${CMAKE_SOURCE_DIR}/build/assets/cart.png.dat
+    ${CMAKE_SOURCE_DIR}/build/assets/config.uli.dat)
 
 target_include_directories(uli78studio
     PRIVATE ${THIRDPARTY_DIR}/jsmn
