@@ -110,15 +110,21 @@ static const char* projectComment(const char* name)
     FOREACH_LANG(ln)
     {
         if(uli_tool_has_ext(name, ln->fileExtension))
-            return ln->projectComment;
+            return ln->projectComment;    
     }
+    
+    /**
+     * Workabound to set comments to js.
+     */
+    return "//";
 
-    return NULL;
+    //return NULL;
 }
 
 s32 uli_project_save(const char* name, void* data, const uli_cartridge* cart)
 {
     const char* comment = projectComment(name);
+
     char* stream = data;
     char* ptr = saveTextSection(stream, cart->code.data);
     char tag[16];

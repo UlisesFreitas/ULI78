@@ -10,6 +10,7 @@ uli78_pro\bin\prj2cart demos\music.lua build\music.uli
 uli78_pro\bin\prj2cart demos\palette.lua build\palette.uli
 uli78_pro\bin\prj2cart demos\sfx.lua build\sfx.uli
 
+
 uli78_pro\bin\prj2cart demos\bunny\jsmark.js build\jsmark.uli
 uli78_pro\bin\bin2txt build\font.uli build\assets\font.uli.dat -z
 uli78_pro\bin\bin2txt build\jsdemo.uli build\assets\jsdemo.uli.dat -z
