@@ -103,7 +103,8 @@ static inline s32 freq2period(s32 freq)
 
 static inline s32 getAmp(s32 volume, s32 amp)
 {
-    return amp * volume / MAX_VOLUME / (ULI_SOUND_CHANNELS + 1);
+    //return amp * volume / MAX_VOLUME / (ULI_SOUND_CHANNELS + 1);
+    return amp * volume / MAX_VOLUME;
 }
 
 static void runPcm(blip_buffer_t* blip, const uli_pcm* pcm, uli_sound_register_data* data)
@@ -159,7 +160,7 @@ static s32 calcLoopPos(const uli_sound_loop* loop, s32 pos)
     return offset;
 }
 
-static void resetSfxPos(uli_channel_data* channel)
+void resetSfxPos(uli_channel_data* channel)
 {
     memset(channel->pos->data, -1, sizeof(uli_sfx_pos));
     channel->tick = -1;

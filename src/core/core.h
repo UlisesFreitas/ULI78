@@ -215,6 +215,7 @@ typedef struct
 void uli_core_tick_io(uli_mem* memory);
 void uli_core_sound_tick_start(uli_mem* memory);
 void uli_core_sound_tick_end(uli_mem* memory);
+void resetSfxPos(uli_channel_data* channel);
 
 #if defined(BUILD_DEPRECATED)
 // mouse cursor is the same in both modes
