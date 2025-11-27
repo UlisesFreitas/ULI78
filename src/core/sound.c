@@ -522,7 +522,7 @@ static void stereo_synthesize(uli_core* core, struct sound_register_data *regdat
 
     for (s32 i = 0; i < ULI_SOUND_CHANNELS; ++i)
     {
-        u8 stereo_volume = ((u8*)&ringbuf->stereo)[i];
+        u8 stereo_volume = uli_tool_peek4(&ringbuf->stereo, stereoRight + i * 2);
 
         const uli_sound_register* reg = &ringbuf->registers[i];
         uli_sound_register_data* data = &regdata->data[i];
