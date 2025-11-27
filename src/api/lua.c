@@ -172,10 +172,6 @@ static const u8 DemoMusic[] =
 };
 
 
-
-
-
-
 ULI_EXPORT const uli_script EXPORT_SCRIPT(Lua) =
 {
     .id                 = 10,
