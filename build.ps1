@@ -56,7 +56,7 @@ cmake --build . --config MinSizeRel --parallel | Tee-Object @teeArgs
 Write-Host "Build finished successfully."
 
 # Filtrar y guardar solo los errores en un archivo separado
-$errorLogFile = Join-Path $PSScriptRoot "buil_results_errors.txt"
+$errorLogFile = Join-Path $PSScriptRoot "build_results_errors.txt"
 Write-Host "Filtering err to $errorLogFile..."
 if (Test-Path $logFile) {
     Get-Content $logFile | Select-String -Pattern "error" -CaseSensitive | Set-Content -Path $errorLogFile
