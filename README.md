@@ -76,8 +76,15 @@ winget install Git.Git Kitware.CMake Microsoft.VisualStudio.2019.BuildTools Ruby
 - Open a new elevated prompt and run the following commands:
 
 ```
-git clone --recursive https://github.com/uli78/ULI-78 && cd .\ULI-78\build
+git clone --recursive https://github.com/uli78/ULI-78
+```
+```
+cd .\ULI-78\build
+```
+```
 cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=MinSizeRel -DBUILD_SDLGPU=On -DBUILD_WITH_ALL=On ..
+```
+```
 cmake --build . --parallel
 ```
 
