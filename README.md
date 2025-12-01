@@ -9,11 +9,7 @@
   - [Pro Features](#pro-features)
 - [Build Instructions](#build-instructions)
   - [Windows](#windows)
-    - [MSVC (Microsoft Visual C++)](#msvc-microsoft-visual-c)
-      - [Windows XP / Windows 7 32-bit (x86)](#windows-xp--windows-7-32-bit-x86)
       - [Windows 10 / 11 64-bit (x64)](#windows-10--11-64-bit-x64)
-    - [MSYS2 / MINGW](#msys2--mingw)
-      - [Windows 10 / 11 64-bit (x64)](#windows-10--11-64-bit-x64-1)
   - [Credits](#credits)
 
 # About
