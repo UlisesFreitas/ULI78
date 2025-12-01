@@ -5,13 +5,8 @@
 
 - [About](#about)
   - [Features](#features)
-- [Binary Downloads](#binary-downloads)
-  - [Nightly builds](#nightly-builds)
-  - [Unofficial Linux/arm64 nightly builds](#unofficial-builds)
 - [Pro Version](#pro-version)
   - [Pro Features](#pro-features)
-- [Community](#community)
-- [Contributing](#contributing)
 - [Build Instructions](#build-instructions)
   - [Windows](#windows)
     - [MSVC (Microsoft Visual C++)](#msvc-microsoft-visual-c)
@@ -19,25 +14,6 @@
       - [Windows 10 / 11 64-bit (x64)](#windows-10--11-64-bit-x64)
     - [MSYS2 / MINGW](#msys2--mingw)
       - [Windows 10 / 11 64-bit (x64)](#windows-10--11-64-bit-x64-1)
-  - [Linux](#linux)
-    - [Ubuntu](#ubuntu)
-      - [Ubuntu 22.04 (Jammy Jellyfish)](#ubuntu-2204-jammy-jellyfish)
-      - [Ubuntu 24.04 (Noble Numbat)](#ubuntu-2404-noble-numbat)
-    - [Arch](#arch)
-    - [Fedora](#fedora)
-      - [Fedora 36](#fedora-36)
-      - [Fedora 40](#fedora-40)
-    - [openSUSE](#opensuse)
-      - [openSUSE Tumbleweed / Leap 16.0](#opensuse-tumbleweed--leap-160)
-    - [Raspberry Pi](#raspberry-pi)
-      - [Raspberry Pi OS (64-Bit) (Bookworm)](#raspberry-pi-os-64-bit-bookworm)
-      - [Raspberry Pi (Retropie)](#raspberry-pi-retropie)
-  - [Mac](#mac)
-  - [FreeBSD](#freebsd)
-- [Install Instructions](#install-instructions)
-  - [Linux](#linux-1)
-  - [Android](#android)
-  - [iOS / tvOS](#ios--tvos)
   - [Credits](#credits)
 
 # About
@@ -72,12 +48,6 @@ To make a retro styled game, the whole process of creation and execution takes p
 ## Stable Builds
 You can download compiled versions for the major operating systems directly from our [Releases](https://github.com/uli78/ULI-78/releases) page.
 
-## Nightly Builds
-Can be downloaded from official [nightly.link](https://nightly.link/uli78/ULI-78/workflows/build/main) page or from the [Github Actions](https://github.com/uli78/ULI-78/actions?query=branch%3Amain) page.
-
-## Unofficial Builds
-Linux (arm64) builds can be downloaded from _aliceisjustplaying_ [nightly.link](https://nightly.link/aliceisjustplaying/ULI-78/workflows/build-linux-arm64/main?preview) page. Tested on Raspberry Pi OS (64-bit) (Bookworm), Asahi Linux (Fedora Remix), Ubuntu 22.04 and Fedora 40.
-
 # Pro Version
 To help support ULI-78 development, we have a [PRO Version](https://uli78.itch.io/uli78).
 
@@ -89,18 +59,6 @@ For users who can't afford the program can easily build the pro version from the
 - Save/load cartridges in text format, and create your game in any editor you want, also useful for version control systems.
 - Even more memory banks: instead of having only 1 memory bank you have 8.
 - Export your game without editors, and then publish it to app stores.
-
-# Community
-You can play and share games, tools and music at [uli78.com/play](https://uli78.com/play).
-
-The community also hangs out and discusses on [Telegram](https://t.me/uli78) or [Discord](https://discord.gg/HwZDw7n4dN).
-
-# Contributing
-You can contribute by reporting a bug or requesting a new feature on our [Issues](https://github.com/uli78/ULI-78/issues) page.
-Keep in mind when engaging on a discussion to follow our [Code of Conduct](https://github.com/uli78/ULI-78/blob/main/CODE_OF_CONDUCT.md).
-
-You can also contribute by reviewing or improving our [Wiki](https://github.com/uli78/ULI-78/wiki).
-The wiki holds ULI-78 documentation, code snippets and game development tutorials.
 
 # Build instructions
 
@@ -194,11 +152,6 @@ mingw32-make "-j$numCPUs"
 ```
 
 You'll find `uli78.exe` in `ULI-78\build\bin`.
-
-
-
-
-
 
 ## Credits
 * Filippo Rivato — [Twitter @HomineLudens](https://twitter.com/HomineLudens)
