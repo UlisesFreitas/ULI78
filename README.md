@@ -28,17 +28,9 @@ To make a retro styled game, the whole process of creation and execution takes p
 ![ULI-78](https://user-images.githubusercontent.com/1101448/92492270-d6bcbc80-f1fb-11ea-9d2d-468ad015ace2.gif)
 
 ### Features
-- Multiple programming languages: [Lua](https://www.lua.org),
-  [Moonscript](https://moonscript.org),
-  [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript),
-  [Ruby](https://www.ruby-lang.org/en),
-  [Wren](https://wren.io/),
-  [Fennel](https://fennel-lang.org),
-  [Squirrel](https://www.squirrel-lang.org),
-  [Janet](https://janet-lang.org), and
-  [Python](https://www.python.org).
+- Programming languages: [Lua](https://www.lua.org)
 - Games can have mouse and keyboard as input
-- Games can have up to 4 controllers as input (with up to 8 buttons, each)
+- Games can have up to 4 controllers as input (with up to 16 buttons, each)
 - Built-in editors: for code, sprites, world maps, sound effects and music
 - An additional memory bank: load different assets from your cartridge while your game is executing
 - Moderated community
