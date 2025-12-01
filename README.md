@@ -1,7 +1,7 @@
-[![Build Status](https://github.com/uli78/ULI-78/workflows/Build/badge.svg)](https://github.com/uli78/ULI-78/actions?query=workflow%3ABuild)
+[![Build Status](https://github.com/uli78/ULI78/workflows/Build/badge.svg)](https://github.com/uli78/ULI78/actions?query=workflow%3ABuild)
 
-![ULI-78](https://uli78.com/img/logo64.png)
-**ULI-78 TINY COMPUTER** — [uli78.com](https://uli78.com)
+![ULI78](https://uli78.com/img/logo64.png)
+**ULI78 TINY COMPUTER** — [uli78.com](https://uli78.com)
 
 - [About](#about)
   - [Features](#features)
@@ -13,15 +13,15 @@
   - [Credits](#credits)
 
 # About
-ULI-78 is a free and open source fantasy computer for making, playing and sharing tiny games.
+ULI78 is a free and open source fantasy computer for making, playing and sharing tiny games.
 
-With ULI-78 you get built-in tools for development: code, sprites, maps, sound editors and the command line, which is enough to create a mini retro game.
+With ULI78 you get built-in tools for development: code, sprites, maps, sound editors and the command line, which is enough to create a mini retro game.
 
-Games are packaged into a cartridge file, which can be easily distributed. ULI-78 works on all popular platforms. This means your cartridge can be played in any device.
+Games are packaged into a cartridge file, which can be easily distributed. ULI78 works on all popular platforms. This means your cartridge can be played in any device.
 
 To make a retro styled game, the whole process of creation and execution takes place under some technical limitations: 240x136 pixel display, 16 color palette, 256 8x8 color sprites, 4 channel sound, etc.
 
-![ULI-78](https://user-images.githubusercontent.com/1101448/92492270-d6bcbc80-f1fb-11ea-9d2d-468ad015ace2.gif)
+![ULI78](https://user-images.githubusercontent.com/1101448/92492270-d6bcbc80-f1fb-11ea-9d2d-468ad015ace2.gif)
 
 ### Features
 - Programming languages: [Lua](https://www.lua.org)
@@ -33,10 +33,10 @@ To make a retro styled game, the whole process of creation and execution takes p
 # Binary Downloads
 
 ## Stable Builds
-You can download compiled versions for the major operating systems directly from our [Releases](https://github.com/uli78/ULI-78/releases) page.
+You can download compiled versions for the major operating systems directly from our [Releases](https://github.com/uli78/ULI78/releases) page.
 
 # Pro Version
-To help support ULI-78 development, we have a [PRO Version](https://uli78.itch.io/uli78).
+To help support ULI78 development, we have a [PRO Version](https://uli78.itch.io/uli78).
 
 This version has a few additional features and binaries can only be downloaded on our itch.io page.
 
@@ -76,10 +76,10 @@ winget install Git.Git Kitware.CMake Microsoft.VisualStudio.2019.BuildTools Ruby
 - Open a new elevated prompt and run the following commands:
 
 ```
-git clone --recursive https://github.com/uli78/ULI-78
+git clone --recursive https://github.com/uli78/ULI78
 ```
 ```
-cd .\ULI-78\build
+cd .\ULI78\build
 ```
 ```
 cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=MinSizeRel -DBUILD_SDLGPU=On -DBUILD_WITH_ALL=On ..
@@ -88,7 +88,7 @@ cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=MinSizeRel -DBUILD_SD
 cmake --build . --parallel
 ```
 
-You'll find `uli78.exe` in `ULI-78\build\bin`.
+You'll find `uli78.exe` in `ULI78\build\bin`.
 
 ## Credits
 * Filippo Rivato — [Twitter @HomineLudens](https://twitter.com/HomineLudens)
