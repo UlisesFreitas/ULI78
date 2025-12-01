@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "retro_endianness.h"
+#include "endians.h"
 #include "cart.h"
 
 #if defined(BUILD_DEPRECATED)

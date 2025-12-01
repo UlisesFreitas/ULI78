@@ -1,7 +1,7 @@
 /* Copyright  (C) 2010-2020 The RetroArch team
  *
  * ---------------------------------------------------------------------------------------
- * The following license statement only applies to this file (retro_endianness.h).
+ * The following license statement only applies to this file (endians.h).
  * ---------------------------------------------------------------------------------------
  *
  * Permission is hereby granted, free of charge,
@@ -23,7 +23,7 @@
 #ifndef __LIBRETRO_SDK_ENDIANNESS_H
 #define __LIBRETRO_SDK_ENDIANNESS_H
 
-#include <retro_inline.h>
+#include <inline.h>
 #include <stdint.h>
 #include <stdlib.h>
 

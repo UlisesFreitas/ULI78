@@ -26,6 +26,16 @@
 
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
+
+#define NUM_STARS 256
+static struct
+{
+    float x, y, z;
+} Stars[NUM_STARS];
+
+static bool StarsInitialized = false;
+static s32 CurrentTicks = 0;
 
 #define ANIM_STATES(macro)  \
     macro(idle)             \
@@ -333,36 +343,51 @@ static void drawMenu(Menu* menu, s32 x, s32 y)
 // BG animation based on DevEd code
 void studio_menu_anim(uli_mem* uli, s32 ticks)
 {
-    uli_api_cls(uli, ULI_COLOR_BG);
-
-    enum{Gap = 72};
-
-    for(s32 x = 16; x <= 16 * 16; x += 16)
+    CurrentTicks = ticks;
+    if(!StarsInitialized)
     {
-        s32 ly = Gap - 8 * 32 * 16 / (x - ticks % 16);
-
-        uli_api_line(uli, 0, ly, ULI78_WIDTH, ly, BG_ANIM_COLOR);
-        uli_api_line(uli, 0, ULI78_HEIGHT - ly,
-            ULI78_WIDTH, ULI78_HEIGHT - ly, BG_ANIM_COLOR);
+        srand(0);
+        for(int i = 0; i < NUM_STARS; ++i)
+        {
+            Stars[i].x = (rand() % (ULI78_WIDTH * 2)) - ULI78_WIDTH;
+            Stars[i].y = (rand() % (ULI78_HEIGHT * 2)) - ULI78_HEIGHT;
+            Stars[i].z = rand() % ULI78_WIDTH;
+        }
+        StarsInitialized = true;
     }
 
-    for(s32 x = -32; x <= 32; x++)
-    {
-        uli_api_line(uli, ULI78_WIDTH / 2 - x * 4, Gap - 16,
-            ULI78_WIDTH / 2 - x * 24, -16, BG_ANIM_COLOR);
+    uli_api_cls(uli, ULI_COLOR_BG);
 
-        uli_api_line(uli, ULI78_WIDTH / 2 - x * 4, ULI78_HEIGHT - Gap + 16,
-            ULI78_WIDTH / 2 - x * 24, ULI78_HEIGHT + 16, BG_ANIM_COLOR);
+    for(int i = 0; i < NUM_STARS; ++i)
+    {
+        Stars[i].z -= 0.75f;
+        if(Stars[i].z < 1)
+        {
+            Stars[i].x = (rand() % (ULI78_WIDTH * 2)) - ULI78_WIDTH;
+            Stars[i].y = (rand() % (ULI78_HEIGHT * 2)) - ULI78_HEIGHT;
+            Stars[i].z = ULI78_WIDTH;
+        }
+
+        float k = 128.0f / Stars[i].z;
+        s32 sx = Stars[i].x * k + ULI78_WIDTH / 2;
+        s32 sy = Stars[i].y * k + ULI78_HEIGHT / 2;
+
+        if(sx >= 0 && sx < ULI78_WIDTH && sy >= 0 && sy < ULI78_HEIGHT)
+        {
+            float size = (1.0f - Stars[i].z / ULI78_WIDTH) * 2;
+            if (size > 0.75)
+                uli_api_circb(uli, sx, sy, (s32)size, BG_ANIM_COLOR);
+            
+            uli_api_pix(uli, sx, sy, BG_ANIM_COLOR, false);
+        }
     }
 }
 
 void studio_menu_anim_scanline(uli_mem* uli, s32 row, void* data)
 {
-    s32 dir = row < ULI78_HEIGHT / 2 ? 1 : -1;
-    s32 val = dir * (ULI78_WIDTH - row * 7 / 2);
+    s32 val = 127 + sin(CurrentTicks / 30.0f) * 127;
     uli_rgb* dst = uli->ram->vram.palette.colors + BG_ANIM_COLOR;
-
-    memcpy(dst, &(uli_rgb){val * 3 / 4, val * 4 / 5, val}, sizeof(uli_rgb));
+    *dst = (uli_rgb){(u8)(val/4), (u8)(val/2), (u8)val};
 }
 
 static void drawCursor(Menu* menu, s32 x, s32 y)

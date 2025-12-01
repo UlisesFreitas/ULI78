@@ -29,7 +29,7 @@
 #include "ext/png.h"
 #include "ext/json.h"
 #include "zip.h"
-#include "retro_endianness.h"
+#include "endians.h"
 
 #if defined(ULI78_PRO)
 #include "studio/project.h"

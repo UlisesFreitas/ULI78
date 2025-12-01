@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "retro_endianness.h"
+#include "endians.h"
 #include "uli78.h"
 #include "defines.h"
 
