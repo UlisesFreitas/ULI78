@@ -84,7 +84,7 @@ struct Menu
     } maxwidth;
 };
 
-#define BG_ANIM_COLOR uli_color_dark_grey
+#define BG_ANIM_COLOR uli_color_black
 
 enum
 {
@@ -356,7 +356,7 @@ void studio_menu_anim(uli_mem* uli, s32 ticks)
         StarsInitialized = true;
     }
 
-    uli_api_cls(uli, ULI_COLOR_BG);
+    uli_api_cls(uli, uli_color_black);
 
     for(int i = 0; i < NUM_STARS; ++i)
     {
@@ -378,7 +378,7 @@ void studio_menu_anim(uli_mem* uli, s32 ticks)
             if (size > 0.75)
                 uli_api_circb(uli, sx, sy, (s32)size, BG_ANIM_COLOR);
             
-            uli_api_pix(uli, sx, sy, BG_ANIM_COLOR, false);
+            uli_api_pix(uli, sx, sy, uli_color_white, false);
         }
     }
 }

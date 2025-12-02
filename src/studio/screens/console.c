@@ -3553,11 +3553,18 @@ static s32 createButtonsTable(char* buf)
         {"B"},
         {"X"},
         {"Y"},
+        {"START(V)"},
+        {"SELECT(C)"},
+        {"L1/LB(W)"},
+        {"R1/RB(E)"},
+        {"L2/LT(Q)"},
+        {"R2/RT(R)"},
+        {"GUIDE(G)"},
     };
 
     int id = 0;
     for(const struct Row* row = Rows, *end = row + COUNT_OF(Rows); row < end; row++) {
-        ptr += sprintf(ptr, "\n| %6s | %2d | %2d | %2d | %2d |", row->action, id, id + 8, id + 16, id + 24);
+        ptr += sprintf(ptr, "\n| %6s | %2d | %2d | %2d | %2d |", row->action, id, id + ULI_BUTTONS, id + 2 * ULI_BUTTONS, id + 3 * ULI_BUTTONS);
         id++;
     }
 
