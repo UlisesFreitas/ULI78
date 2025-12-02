@@ -41,13 +41,13 @@ To make a retro styled game, the whole process of creation and execution takes p
 | B | 5 | 21 | 37 | 53 |
 | X | 6 | 22 | 38 | 54 |
 | Y | 7 | 23 | 39 | 55 |
-| START | 8 | 24 | 40 | 56 |
-| SELECT | 9 | 25 | 41 | 57 |
-| L1/LB | 10 | 26 | 42 | 58 |
-| R1/RB | 11 | 27 | 43 | 59 |
-| L2/LT | 12 | 28 | 44 | 60 |
-| R2/RT | 13 | 29 | 45 | 61 |
-| GUIDE | 14 | 30 | 46 | 62 |
+| START(V) | 8 | 24 | 40 | 56 |
+| SELECT(C) | 9 | 25 | 41 | 57 |
+| L1/LB(W) | 10 | 26 | 42 | 58 |
+| R1/RB(E) | 11 | 27 | 43 | 59 |
+| L2/LT(Q) | 12 | 28 | 44 | 60 |
+| R2/RT(R) | 13 | 29 | 45 | 61 |
+| GUIDE(G) | 14 | 30 | 46 | 62 |
 
 # Binary Downloads
 
