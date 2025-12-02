@@ -30,6 +30,25 @@ To make a retro styled game, the whole process of creation and execution takes p
 - Built-in editors: for code, sprites, world maps, sound effects and music
 - An additional memory bank: load different assets from your cartridge while your game is executing
 
+# Extended buttons for gamepad and keyboard
+| ACTION | P1 | P2 | P3 | P4 |
+| :---: | :---: | :---: | :---: | :---: |
+| UP | 0 | 16 | 32 | 48 |
+| DOWN | 1 | 17 | 33 | 49 |
+| LEFT | 2 | 18 | 34 | 50 |
+| RIGHT | 3 | 19 | 35 | 51 |
+| A | 4 | 20 | 36 | 52 |
+| B | 5 | 21 | 37 | 53 |
+| X | 6 | 22 | 38 | 54 |
+| Y | 7 | 23 | 39 | 55 |
+| START | 8 | 24 | 40 | 56 |
+| SELECT | 9 | 25 | 41 | 57 |
+| L1/LB | 10 | 26 | 42 | 58 |
+| R1/RB | 11 | 27 | 43 | 59 |
+| L2/LT | 12 | 28 | 44 | 60 |
+| R2/RT | 13 | 29 | 45 | 61 |
+| GUIDE | 14 | 30 | 46 | 62 |
+
 # Binary Downloads
 
 ## Stable Builds
