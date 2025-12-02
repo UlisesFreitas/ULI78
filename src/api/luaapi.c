@@ -1609,6 +1609,9 @@ static int lua_loadfile(lua_State *lua)
     return 0;
 }
 
+// Declaración para nuestra nueva librería http
+LUALIB_API int luaopen_http(lua_State *L);
+
 void luaapi_open(lua_State *lua)
 {
     static const luaL_Reg loadedlibs[] =
@@ -1620,6 +1623,8 @@ void luaapi_open(lua_State *lua)
         { LUA_STRLIBNAME, luaopen_string },
         { LUA_MATHLIBNAME, luaopen_math },
         { LUA_DBLIBNAME, luaopen_debug },
+        // Añadimos nuestra librería http a la lista
+        { "http", luaopen_http },
         { NULL, NULL }
     };
 

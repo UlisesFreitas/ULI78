@@ -150,6 +150,7 @@ include(cmake/png.cmake)
 include(cmake/tools.cmake)
 
 include(cmake/lua.cmake)
+include(cmake/ai.cmake)
 
 include(cmake/core.cmake)
 include(cmake/wave.cmake)
