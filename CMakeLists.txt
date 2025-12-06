@@ -63,6 +63,10 @@ add_library(runtime INTERFACE)
 
 target_include_directories(runtime INTERFACE "${CMAKE_BINARY_DIR}")
 
+if(MSVC)
+    target_link_libraries(runtime INTERFACE ${CURL_LIBRARY} Wldap32 Crypt32 Normaliz )
+endif()
+
 if(BUILD_STATIC)
     set(ULI_RUNTIME STATIC)
     target_compile_definitions(runtime INTERFACE ULI_RUNTIME_STATIC)
@@ -144,14 +148,23 @@ set(DEMO_CARTS_IN ${CMAKE_SOURCE_DIR}/demos)
 
 include(cmake/gif.cmake)
 include(cmake/blipbuf.cmake)
+
+# Configuración global de CURL
+add_library(curl INTERFACE)
+set(CURL_DIR ${THIRDPARTY_DIR}/curl)
+target_include_directories(curl INTERFACE ${CURL_DIR}/include)
+target_link_libraries(curl INTERFACE ${CURL_DIR}/lib/libcurl.dll.a)
+if(MSVC)
+    target_link_libraries(curl INTERFACE Wldap32 Crypt32 Normaliz)
+endif()
+file(COPY ${CURL_DIR}/bin/libcurl-x64.dll DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
 include(cmake/zlib.cmake)
 include(cmake/zip.cmake)
 include(cmake/png.cmake)
 include(cmake/tools.cmake)
 
 include(cmake/lua.cmake)
-include(cmake/ai.cmake)
-
 include(cmake/core.cmake)
 include(cmake/wave.cmake)
 include(cmake/argparse.cmake)

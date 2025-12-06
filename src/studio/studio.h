@@ -201,6 +201,7 @@ enum
     uli_icon_bigselect  = 135,
     uli_icon_bigfill    = 136,
     uli_icon_loop       = 137,
+    uli_icon_ai         = 118,
 };
 
 void setCursor(Studio* studio, uli_cursor id);

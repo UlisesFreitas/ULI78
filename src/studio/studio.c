@@ -37,14 +37,15 @@
 #include "editors/sfx.h"
 #include "editors/music.h"
 #include "screens/console.h"
+#include "editors/ai.h"
 #include "screens/surf.h"
 #include "ext/history.h"
 #include "net.h"
 #include "wave_writer.h"
-#include "ext/gif.h"
 #define MSF_GIF_IMPL
 #include "ext/msf_gif.h"
 
+#include <curl/curl.h>
 #include "../fftdata.h"
 #include "ext/fft.h"
 
@@ -633,7 +634,7 @@ static void drawExtrabar(Studio* studio, uli_mem* uli)
 {
     enum {Size = 7};
 
-    s32 x = (COUNT_OF(Modes) + 1) * Size + 17 * ULI_FONT_WIDTH;
+    s32 x = (COUNT_OF(Modes) -1) * Size + 17 * ULI_FONT_WIDTH;
     s32 y = 0;
 
     static struct Icon {u8 id; StudioEvent event; const char* tip;} Icons[] =
@@ -1483,6 +1484,7 @@ static void initModules(Studio* studio)
     resetBanks(studio);
 
     initCode(studio->code, studio);
+    ai_init();
 
     for(s32 i = 0; i < ULI_EDITOR_BANKS; i++)
     {
@@ -2594,6 +2596,8 @@ void exitGame(Studio* studio)
 
 void studio_delete(Studio* studio)
 {
+    // Limpiamos libcurl aquí, una sola vez al cerrar.
+    curl_global_cleanup();
     {
 #if defined(BUILD_EDITORS)
         for(s32 i = 0; i < ULI_EDITOR_BANKS; i++)
@@ -2767,6 +2771,9 @@ Studio* studio_create(s32 argc, char **argv, s32 samplerate, uli78_pixel_color_f
     // load script modules
     fs_enum(fs_appfolder(), onEnumModule, NULL);
 #endif
+
+    curl_global_init(CURL_GLOBAL_ALL);
+    ai_init();
 
     Studio* studio = NEW(Studio);
     *studio = (Studio)

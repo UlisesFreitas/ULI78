@@ -27,6 +27,7 @@
 #include <lauxlib.h>
 #include <lualib.h>
 #include <ctype.h>
+#include <curl/curl.h>
 
 extern bool parse_note(const char* noteStr, s32* note, s32* octave);
 
@@ -1612,6 +1613,12 @@ static int lua_loadfile(lua_State *lua)
 // Declaración para nuestra nueva librería http
 LUALIB_API int luaopen_http(lua_State *L);
 
+// Declaración para la nueva librería json
+LUALIB_API int luaopen_json(lua_State *L);
+
+// Declaración de las funciones de http.c
+void http_cleanup();
+
 void luaapi_open(lua_State *lua)
 {
     static const luaL_Reg loadedlibs[] =
@@ -1625,6 +1632,8 @@ void luaapi_open(lua_State *lua)
         { LUA_DBLIBNAME, luaopen_debug },
         // Añadimos nuestra librería http a la lista
         { "http", luaopen_http },
+        // Añadimos nuestra librería json a la lista
+        { "json", luaopen_json },
         { NULL, NULL }
     };
 
@@ -1633,6 +1642,9 @@ void luaapi_open(lua_State *lua)
         luaL_requiref(lua, lib->name, lib->func, 1);
         lua_pop(lua, 1);
     }
+
+    // Inicializamos libcurl aquí, una sola vez.
+    curl_global_init(CURL_GLOBAL_ALL);
 }
 
 void luaapi_init(uli_core* core)
@@ -1664,6 +1676,9 @@ void luaapi_close(uli_mem* uli)
         lua_close(core->currentVM);
         core->currentVM = NULL;
     }
+
+    http_cleanup();
+
 }
 
 /*

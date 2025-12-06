@@ -22,6 +22,7 @@
 
 #include "code.h"
 #include "ext/history.h"
+#include "ai.h"
 
 #include <ctype.h>
 #include "uli_assert.h"
@@ -32,7 +33,7 @@
 #define CODE_EDITOR_WIDTH (ULI78_WIDTH - BOOKMARK_WIDTH)
 #define CODE_EDITOR_HEIGHT (ULI78_HEIGHT - TOOLBAR_SIZE - STUDIO_TEXT_HEIGHT)
 #define TEXT_BUFFER_HEIGHT (CODE_EDITOR_HEIGHT / STUDIO_TEXT_HEIGHT)
-#define SIDEBAR_WIDTH (12 * ULI_FONT_WIDTH)
+#define SIDEBAR_WIDTH (ULI78_WIDTH / 2)
 
 #if defined(ULI78_PRO)
 #   define MAX_CODE sizeof(uli_code)
@@ -3002,6 +3003,7 @@ static void processKeyboard(Code* code)
             else if(keyWasPressed(code->studio, uli_key_g))     emacsMode ? killSelection(code) : setCodeMode(code, TEXT_GOTO_MODE);
             else if(keyWasPressed(code->studio, uli_key_b))     emacsMode ? leftColumn(code) : setCodeMode(code, TEXT_BOOKMARK_MODE);
             else if(keyWasPressed(code->studio, uli_key_o))     setCodeMode(code, TEXT_OUTLINE_MODE);
+            else if(keyWasPressed(code->studio, uli_key_i))     setCodeMode(code, TEXT_AI_MODE);
             else if(keyWasPressed(code->studio, uli_key_n))     downLine(code);
             else if(keyWasPressed(code->studio, uli_key_p))     upLine(code);
             else if(keyWasPressed(code->studio, uli_key_e))     endLine(code);
@@ -3610,6 +3612,228 @@ static void textOutlineTick(Code* code)
     drawPopupBar(code, "FUNC:");
 }
 
+static void aiTick(Code* code)
+{
+    uli_mem* uli = code->uli;
+
+    // 1. Dibujar el Sidebar
+    uli_rect rect = {ULI78_WIDTH - SIDEBAR_WIDTH, ULI_FONT_HEIGHT + 1, SIDEBAR_WIDTH, ULI78_HEIGHT - (ULI_FONT_HEIGHT + 1)};
+    uli_api_rect(uli, rect.x, rect.y, rect.w, rect.h, uli_color_dark_grey);
+    uli_api_rectb(uli, rect.x - 1, rect.y, rect.w + 1, rect.h, uli_color_black);
+    uli_api_print(uli, "AI", rect.x + 4, rect.y + 4, uli_color_white, true, 1, false);
+
+
+
+    // 3. Área para el input del prompt (3 lines height)
+    s32 input_lines = 3;
+    s32 input_height = (input_lines * ULI_FONT_HEIGHT) + 4;
+    uli_rect input_rect = {rect.x + 2, rect.y + rect.h - input_height - 2, rect.w - 4, input_height};
+    uli_api_rect(uli, input_rect.x, input_rect.y, input_rect.w, input_rect.h, uli_color_black);
+    uli_api_rectb(uli, input_rect.x, input_rect.y, input_rect.w, input_rect.h, uli_color_light_grey);
+
+    // AI Text Logic & Rendering
+    const char* text_to_draw = code->ai.thinking ? "Thinking..." : (code->ai.history ? code->ai.history : "");
+    uli_rect chat_history_rect = {rect.x + 2, rect.y + 16, rect.w - 4, rect.h - 32 - input_height};
+    uli_api_rect(uli, chat_history_rect.x, chat_history_rect.y, chat_history_rect.w, chat_history_rect.h, uli_color_black);
+
+    // Process Scroll
+    if (checkMousePos(code->studio, &chat_history_rect)) {
+        uli78_input* input = &code->uli->ram->input;
+        if(input->mouse.scrolly) {
+            code->ai.history_scroll -= input->mouse.scrolly * ULI_FONT_HEIGHT * 3;
+            if (code->ai.history_scroll < 0) code->ai.history_scroll = 0;
+        }
+    }
+
+    s32 start_x = chat_history_rect.x + 2;
+    s32 start_y = chat_history_rect.y + 2 - code->ai.history_scroll;
+    s32 max_x = chat_history_rect.x + chat_history_rect.w - 6; // Padding for scrollbar
+
+    // --- Pass 1: Input Processing & Layout Calculation ---
+    s32 total_height = 0;
+    
+    if(checkMousePos(code->studio, &chat_history_rect))
+    {
+        uli_point mouse = uli_api_mouse(uli);
+        s32 hover_index = -1;
+        
+        s32 dx = start_x;
+        s32 dy = start_y;
+        s32 i = 0;
+        
+        while(text_to_draw[i]) {
+            char c = text_to_draw[i];
+            s32 char_width = getFontWidth(code); // Assuming standard width, altFont might be same spacing
+            
+            // Check word wrap
+            if (c != '\n' && dx + char_width >= max_x) {
+                dx = start_x;
+                dy += ULI_FONT_HEIGHT + 1;
+            }
+
+            if (mouse.y >= dy && mouse.y < dy + ULI_FONT_HEIGHT) {
+                if (mouse.x >= dx && mouse.x < dx + char_width) {
+                    hover_index = i;
+                }
+            }
+            
+            if (c == '\n') {
+                dx = start_x;
+                dy += ULI_FONT_HEIGHT + 1;
+            } else {
+                dx += char_width;
+            }
+            i++;
+        }
+        total_height = dy - start_y + ULI_FONT_HEIGHT;
+
+        if (checkMouseDown(code->studio, &chat_history_rect, uli_mouse_left)) {
+            if (hover_index != -1) {
+                if (!code->ai.selecting) {
+                    code->ai.selecting = true;
+                    code->ai.selection_start = hover_index;
+                    code->ai.selection_end = hover_index;
+                } else {
+                    code->ai.selection_end = hover_index;
+                }
+            }
+        } else {
+            code->ai.selecting = false;
+        }
+    } else if (!checkMouseDown(code->studio, &chat_history_rect, uli_mouse_left)) {
+         code->ai.selecting = false;
+    }
+
+    // Calc height just in case pass 1 didn't run fully or for scroll clamping
+    if (total_height == 0) {
+         s32 dx = start_x;
+         s32 dy = 0;
+         s32 i = 0;
+         while(text_to_draw[i]) {
+            char c = text_to_draw[i];
+            s32 char_width = getFontWidth(code);
+            if (c != '\n' && dx + char_width >= max_x) {
+                dx = start_x;
+                dy += ULI_FONT_HEIGHT + 1;
+            }
+            if (c == '\n') {
+                dx = start_x;
+                dy += ULI_FONT_HEIGHT + 1;
+            } else {
+                dx += char_width;
+            }
+            i++;
+         }
+         total_height = dy + ULI_FONT_HEIGHT;
+    }
+    
+    // Clamp scroll
+    s32 max_scroll = total_height - chat_history_rect.h;
+    if (max_scroll < 0) max_scroll = 0;
+    if (code->ai.history_scroll > max_scroll) code->ai.history_scroll = max_scroll;
+    start_y = chat_history_rect.y + 2 - code->ai.history_scroll; // Re-calc start_y after clamp
+
+
+    // --- Pass 2: Rendering ---
+    // Enable scissor/clip rect for history (simulated by bounds check)
+    // Actually we don't have scissor in API, so we skip drawing outside rect
+    
+    s32 x = start_x;
+    s32 y = start_y;
+    s32 index = 0;
+    
+    s32 min_sel = code->ai.selection_start < code->ai.selection_end ? code->ai.selection_start : code->ai.selection_end;
+    s32 max_sel = code->ai.selection_start > code->ai.selection_end ? code->ai.selection_start : code->ai.selection_end;
+
+    while(text_to_draw[index]) {
+        char c = text_to_draw[index];
+        s32 char_width = getFontWidth(code);
+
+        bool wrap = (c != '\n' && x + char_width >= max_x);
+        if (wrap) {
+            x = start_x;
+            y += ULI_FONT_HEIGHT + 1;
+        }
+
+        if (y >= chat_history_rect.y - ULI_FONT_HEIGHT && y < chat_history_rect.y + chat_history_rect.h) {
+            if (code->ai.selection_start != -1 && index >= min_sel && index <= max_sel) {
+                uli_api_rect(uli, x, y, char_width, ULI_FONT_HEIGHT + 1, uli_color_blue); 
+            }
+            if (c != '\n')
+                 uli_api_print(uli, (char[]){c, 0}, x, y, uli_color_light_grey, true, 1, code->altFont); // Use altFont for smaller look
+        }
+
+        if (c == '\n') {
+            x = start_x;
+            y += ULI_FONT_HEIGHT + 1;
+        } else {
+            x += char_width;
+        }
+        index++;
+    }
+
+    // Scrollbar
+    if (max_scroll > 0) {
+        s32 sb_h = (chat_history_rect.h * chat_history_rect.h) / total_height;
+        if (sb_h < 10) sb_h = 10;
+        s32 sb_y = chat_history_rect.y + (code->ai.history_scroll * (chat_history_rect.h - sb_h)) / max_scroll;
+        uli_api_rect(uli, chat_history_rect.x + chat_history_rect.w - 5, chat_history_rect.y, 4, chat_history_rect.h, uli_color_dark_grey);
+        uli_api_rect(uli, chat_history_rect.x + chat_history_rect.w - 5, sb_y, 4, sb_h, uli_color_light_grey);
+    }
+
+    // 4. Procesar entrada de teclado para el prompt
+    char sym = getKeyboardText(code->studio);
+    if (sym)
+    {
+        size_t len = strlen(code->ai.prompt);
+        if (len < sizeof(code->ai.prompt) - 1)
+        {
+            code->ai.prompt[len] = sym;
+            code->ai.prompt[len + 1] = '\0';
+        }
+    }
+
+    if (keyWasPressed(code->studio, uli_key_backspace))
+    {
+        size_t len = strlen(code->ai.prompt);
+        if (len > 0)
+        {
+            code->ai.prompt[len - 1] = '\0';
+        }
+    }
+
+    if (enterWasPressed(code->studio))
+    {
+        if (strlen(code->ai.prompt) > 0)
+        {
+            ai_send_prompt(code, code->ai.prompt, code->src);
+        }
+        code->ai.prompt[0] = '\0';
+    }
+
+    // 5. Dibujar el texto del prompt con wordwrap (altFont)
+    x = input_rect.x + 2;
+    y = input_rect.y + 2;
+    start_x = x;
+    max_x = input_rect.x + input_rect.w - 2;
+    index = 0;
+    while(code->ai.prompt[index]) {
+        char c = code->ai.prompt[index];
+        s32 char_width = getFontWidth(code);
+        
+        if (x + char_width >= max_x) {
+            x = start_x;
+            y += ULI_FONT_HEIGHT + 1;
+        }
+        uli_api_print(uli, (char[]){c, 0}, x, y, uli_color_white, true, 1, code->altFont);
+        x += char_width;
+        index++;
+    }
+    // Cursor
+    if (y < input_rect.y + input_rect.h)
+         uli_api_rect(uli, x, y, 1, ULI_FONT_HEIGHT, uli_color_white);
+}
+
 static void drawFontButton(Code* code, s32 x, s32 y)
 {
     uli_mem* uli = code->uli;
@@ -3690,11 +3914,12 @@ static void drawCodeToolbar(Code* code)
 
     static const struct Button {u8 icon; const char* tip;} Buttons[] =
     {
-        {uli_icon_hand, "DRAG [right mouse]"},
-        {uli_icon_find, "FIND [ctrl+f]"},
-        {uli_icon_goto, "GOTO [ctrl+g]"},
-        {uli_icon_bookmark, "BOOKMARKS [ctrl+b]"},
-        {uli_icon_outline, "OUTLINE [ctrl+o]"},
+        {uli_icon_hand, "DRAG[right mouse]"},
+        {uli_icon_find, "FIND[ctrl+f]"},
+        {uli_icon_goto, "GOTO[ctrl+g]"},
+        {uli_icon_bookmark, "BOOKMARKS[ctrl+b]"},
+        {uli_icon_outline, "OUTLINE[ctrl+o]"},
+        {uli_icon_ai, "AI[ctrl+i]"},
     };
 
     enum {Count = COUNT_OF(Buttons), Size = 7};
@@ -3740,6 +3965,7 @@ static void drawCodeToolbar(Code* code)
 static void tick(Code* code)
 {
     processAnim(code->anim.movie, code);
+    ai_update(code);
 
     if(code->cursor.delay)
         code->cursor.delay--;
@@ -3753,12 +3979,14 @@ static void tick(Code* code)
     case TEXT_GOTO_MODE:    textGoToTick(code);     break;
     case TEXT_BOOKMARK_MODE:textBookmarkTick(code); break;
     case TEXT_OUTLINE_MODE: textOutlineTick(code);  break;
+    case TEXT_AI_MODE:      aiTick(code);           break;
     }
 
     drawCodeToolbar(code);
 
     code->tickCounter++;
 }
+
 
 static void escape(Code* code)
 {
@@ -3785,7 +4013,26 @@ static void onStudioEvent(Code* code, StudioEvent event)
     switch(event)
     {
     case ULI_TOOLBAR_CUT: cutToClipboard(code, false); break;
-    case ULI_TOOLBAR_COPY: copyToClipboard(code, false); break;
+    case ULI_TOOLBAR_COPY: 
+        if (code->mode == TEXT_AI_MODE && code->ai.selection_start != -1) {
+            s32 min_sel = code->ai.selection_start < code->ai.selection_end ? code->ai.selection_start : code->ai.selection_end;
+            s32 max_sel = code->ai.selection_start > code->ai.selection_end ? code->ai.selection_start : code->ai.selection_end;
+            const char* text = code->ai.thinking ? "Thinking..." : (code->ai.history ? code->ai.history : "");
+            s32 len = max_sel - min_sel + 1;
+            if (len > 0 && strlen(text) > min_sel) {
+                 char* buffer = malloc(len + 1);
+                 if (buffer) {
+                    strncpy(buffer, text + min_sel, len);
+                    buffer[len] = 0;
+                    //toClipboard(buffer, len, false);
+                    uli_sys_clipboard_set(buffer);
+                    free(buffer);
+                 }
+            }
+        } else {
+            copyToClipboard(code, false); 
+        }
+        break;
     case ULI_TOOLBAR_PASTE: copyFromClipboard(code, false); break;
     case ULI_TOOLBAR_UNDO: undo(code); break;
     case ULI_TOOLBAR_REDO: redo(code); break;
@@ -3820,6 +4067,7 @@ void initCode(Code* code, Studio* studio)
     freeAnim(code);
 
     if(code->history) history_delete(code->history);
+    if(code->ai.history) free(code->ai.history);
 
     uli_code* src = &getMemory(studio)->cart.code;
 
@@ -3871,6 +4119,11 @@ void initCode(Code* code, Studio* studio)
         .event = onStudioEvent,
         .update = update,
     };
+    code->ai.history = calloc(1, 1);
+    code->ai.prompt[0] = '\0';
+    code->ai.selection_start = -1;
+    code->ai.selection_end = -1;
+    code->ai.selecting = false;
 
     code->anim.movie = resetMovie(&code->anim.idle);
 

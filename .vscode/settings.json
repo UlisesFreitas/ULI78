@@ -1,3 +1,4 @@
 {
-    "geminicodeassist.rules": ""
+    "geminicodeassist.rules": "",
+    "CodeGPT.apiKey": "Ollama"
 }

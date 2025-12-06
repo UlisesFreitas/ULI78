@@ -70,14 +70,18 @@ if(BUILD_WITH_LUA OR BUILD_WITH_MOON OR BUILD_WITH_YUE OR BUILD_WITH_FENNEL)
     add_library(luaapi STATIC
         ${LUA_SRC}
         ${CMAKE_SOURCE_DIR}/src/api/luaapi.c
+        ${CMAKE_SOURCE_DIR}/src/ai/c_http.c
+        ${CMAKE_SOURCE_DIR}/src/ai/c_json.c
         ${CMAKE_SOURCE_DIR}/src/api/parse_note.c
     )
-    target_link_libraries(luaapi PRIVATE runtime)
+    # Enlazamos con la interfaz de curl
+    target_link_libraries(luaapi PRIVATE runtime curl)
 
-    target_compile_definitions(luaapi PRIVATE LUA_COMPAT_5_2)
+    target_compile_definitions(luaapi PRIVATE LUA_COMPAT_5_2 JSMN_PARENT_LINKS)
 
     target_include_directories(luaapi
         PUBLIC ${THIRDPARTY_DIR}/lua
+            ${CMAKE_SOURCE_DIR}
             ${CMAKE_SOURCE_DIR}/include
             ${CMAKE_SOURCE_DIR}/src
         )
@@ -102,9 +106,5 @@ if(BUILD_WITH_LUA)
             ${CMAKE_SOURCE_DIR}/include
             ${CMAKE_SOURCE_DIR}/src
     )
-
-    if(NINTENDO_3DS)
-        target_compile_definitions(luaapi PUBLIC LUA_32BITS)
-    endif()
 
 endif()

@@ -88,7 +88,8 @@ struct Code
         TEXT_GOTO_MODE,
         TEXT_BOOKMARK_MODE,
         TEXT_OUTLINE_MODE,
-        TEXT_REPLACE_MODE,
+        TEXT_AI_MODE,
+        TEXT_REPLACE_MODE, 
         TEXT_EDIT_MODE,
     } mode;
 
@@ -118,6 +119,18 @@ struct Code
     const char* matchedDelim;
     bool altFont;
     bool shadowText;
+
+    struct
+    {
+        char prompt[STUDIO_TEXT_BUFFER_WIDTH];
+        char* history;
+        s32 history_scroll;
+        s32 history_size;
+        bool thinking;
+        s32 selection_start;
+        s32 selection_end;
+        bool selecting;
+    } ai;
 
     struct
     {

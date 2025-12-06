@@ -1,3 +1,5 @@
+**Preview Ctrl + Shift + V**
+
 [![Build Status](https://github.com/uli78/ULI78/workflows/Build/badge.svg)](https://github.com/uli78/ULI78/actions?query=workflow%3ABuild)
 
 ![ULI78](https://uli78.com/img/logo64.png)

@@ -1,0 +1,1 @@
+U:\ULI78\src\studio\editors\code.c(3648,14): error C2374: 'chat_history_rect': redefinition; multiple initialization [U:\ULI78\uli78_pro\uli78studio.vcxproj]

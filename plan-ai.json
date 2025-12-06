@@ -1,0 +1,108 @@
+{
+  "project_goal": "Integrar un modelo de lenguaje grande (LLM) local, a través de Ollama, en la consola de codificación Lua de uli78 para proporcionar asistencia de desarrollo impulsada por IA.",
+  "current_state_analysis": {
+    "project_name": "uli78",
+    "description": "Un motor de juego/consola retro basado en C que utiliza SDL2 y SDL-GPU para gráficos y entrada. El entorno de scripting principal es Lua. La integración de IA se está realizando con Ollama, utilizando libcurl para la comunicación HTTP desde C, expuesto a Lua.",
+    "key_components": [
+      "Núcleo en C (core/core.h, studio/studio.h)",
+      "Editores de Studio (src/studio/editors/code.c, map.c, etc.)",
+      "Entorno de scripting Lua (src/api/lua.c, luaapi.c)",
+      "SDL2 y SDL-GPU para renderizado y manejo de eventos",
+      "Sistema de compilación CMake y scripts (CMakeLists.txt, build.ps1)",
+      "Bindings C a Lua para HTTP (lua_http.c) y JSON (lua_json.c) ya implementados."
+    ],
+    "integration_challenge": "La nueva estrategia requiere crear un nuevo 'editor' de IA en C que se integre con el editor de código principal y se comunique con el backend de Lua/HTTP existente de forma asíncrona."
+  },
+  "ai_integration_strategy": {
+    "llm_provider": "Ollama (local)",
+    "communication_method": "API REST de Ollama a través de bindings de C para Lua",
+    "lua_interface": "Módulo Lua que gestiona la lógica de la API de Ollama.",
+    "console_interaction": "Integración directa en la UI del editor de código como un panel lateral (sidebar), similar a la función 'Outline', en lugar de un comando de consola."
+  },
+  "phases": [
+    {
+      "phase_name": "Fase 1: Creación de la Interfaz de Usuario del Editor de IA",
+      "description": "Crear la estructura básica del editor de IA como un nuevo modo dentro del editor de código principal. Este editor gestionará un panel lateral para la interacción con la IA.",
+      "steps": [
+        {
+          "step_id": "1.1",
+          "task": "Crear ficheros ai.c y ai.h",
+          "details": "En `src/studio/editors/`, crear `ai.c` y `ai.h` siguiendo la estructura de otros editores como `code.c`. Deben contener funciones como `initAi`, `tick`, `escape`, etc."
+        },
+        {
+          "step_id": "1.2",
+          "task": "Integrar el modo AI en el editor de código",
+          "details": "En `code.c`, añadir un nuevo modo (ej. `TEXT_AI_MODE`). Añadir un icono a la barra de herramientas (`drawCodeToolbar`) que, al ser pulsado, llame a `setCodeMode` con el nuevo modo de IA."
+        },
+        {
+          "step_id": "1.3",
+          "task": "Dibujar el panel lateral (Sidebar) de la IA",
+          "details": "En `ai.c`, implementar la lógica de renderizado para un panel lateral. Se puede reutilizar o adaptar la función `drawSidebarBar` de `code.c`. El panel debe incluir un área para el historial de chat y un campo de texto para la entrada del usuario."
+        }
+      ],
+      "estimated_time": "2-3 días"
+    },
+    {
+      "phase_name": "Fase 2: Conexión entre la UI y el Backend de IA",
+      "description": "Establecer la comunicación entre el nuevo editor de IA en C y la lógica de Lua que se comunica con Ollama.",
+      "steps": [
+        {
+          "step_id": "2.1",
+          "task": "Invocar Lua desde el editor de IA",
+          "details": "Cuando el usuario envía un prompt desde el panel de IA, el `tick` de `ai.c` debe ejecutar una función Lua específica (ej. `ai.chat(prompt, context)`). El contexto será el código actual del editor principal (`code->src`)."
+        },
+        {
+          "step_id": "2.2",
+          "task": "Módulo Lua 'ai.lua'",
+          "details": "Crear (o adaptar) un módulo `ai.lua` que reciba el prompt, construya la petición JSON para la API de Ollama y la envíe usando el binding `http.post` asíncrono ya existente."
+        },
+        {
+          "step_id": "2.3",
+          "task": "Retorno de datos de Lua a C",
+          "details": "El callback asíncrono en `lua_http.c` que recibe la respuesta de Ollama debe invocar una nueva función C expuesta desde `ai.c` (ej. `ai_update_chat(response_text)`). Esta función actualizará el contenido del panel lateral de la IA."
+        }
+      ],
+      "estimated_time": "3-5 días"
+    },
+    {
+      "phase_name": "Fase 3: Funcionalidad y Experiencia de Usuario",
+      "description": "Mejorar la interacción y pulir la funcionalidad del asistente de IA.",
+      "steps": [
+        {
+          "step_id": "3.1",
+          "task": "Gestión del Historial de Conversación",
+          "details": "En `ai.c`, gestionar el estado de la conversación (preguntas y respuestas) para mostrarlo en el panel lateral. Permitir scroll para ver conversaciones largas."
+        },
+        {
+          "step_id": "3.2",
+          "task": "Envío de Contexto de Código Seleccionado",
+          "details": "Mejorar la lógica para que si hay una selección de texto en el editor de código (`code->cursor.selection`), solo esa selección se envíe como contexto a la IA. Si no hay selección, se envía el fichero completo."
+        },
+        {
+          "step_id": "3.3",
+          "task": "Visualización de Respuestas",
+          "details": "Mejorar la forma en que se muestran las respuestas de la IA en el panel, posiblemente con formato de texto o resaltado de sintaxis para fragmentos de código. Añadir un botón para copiar el código sugerido por la IA al portapapeles."
+        }
+      ],
+      "estimated_time": "2-3 días"
+    },
+    {
+      "phase_name": "Fase 4: Características Avanzadas y Consideraciones Futuras",
+      "description": "Explorar funcionalidades más sofisticadas y mejoras a largo plazo una vez que el núcleo esté funcionando.",
+      "steps": [
+        "Integración de autocompletado/sugerencias de código en el editor Lua.",
+        "Asistencia de depuración: la IA analiza errores de tiempo de ejecución o lógica.",
+        "Refactorización de código: la IA sugiere mejoras o alternativas.",
+        "Acciones rápidas: Botones en el panel de IA para 'Aplicar sugerencia', 'Insertar código en el cursor', etc."
+      ],
+      "estimated_time": "Continuo"
+    }
+  ],
+  "technical_considerations": [
+    "**Rendimiento:** La comunicación asíncrona con Ollama (ya implementada con `libcurl` y `curl_multi_perform`) es crucial para no bloquear el hilo principal de la aplicación mientras se espera la respuesta del LLM.",
+    "**Uso de Recursos:** Ollama y los LLM pueden consumir mucha RAM y CPU. Informar al usuario sobre los requisitos del sistema.",
+    "**Manejo de Errores:** Implementar un manejo robusto para fallos de red, servicio Ollama no iniciado, y respuestas API inesperadas, mostrando mensajes claros en el panel de la IA.",
+    "**Compatibilidad Multiplataforma:** Asegurar que los bindings de C y las llamadas al sistema funcionen correctamente en Windows, macOS y Linux.",
+    "**Gestión de Estado:** El estado del editor de IA (texto de entrada, historial de chat, scroll) debe gestionarse cuidadosamente en la estructura de C (`ai.c`)."
+  ]
+}

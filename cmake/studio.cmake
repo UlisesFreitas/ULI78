@@ -26,6 +26,7 @@ if(BUILD_EDITORS)
         ${ULI78LIB_DIR}/studio/editors/world.c
         ${ULI78LIB_DIR}/studio/editors/sfx.c
         ${ULI78LIB_DIR}/studio/editors/music.c
+        ${ULI78LIB_DIR}/studio/editors/ai.c
         ${ULI78LIB_DIR}/studio/net.c
         ${ULI78LIB_DIR}/ext/history.c
         ${ULI78LIB_DIR}/ext/gif.c
@@ -46,10 +47,11 @@ add_library(uli78studio STATIC
 
 target_include_directories(uli78studio
     PRIVATE ${THIRDPARTY_DIR}/jsmn
+    PUBLIC ${ULI78LIB_DIR}
     PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-target_link_libraries(uli78studio PUBLIC uli78core PRIVATE zip wave_writer argparse giflib png)
+target_link_libraries(uli78studio PUBLIC uli78core luaapi curl PRIVATE zip wave_writer argparse giflib png)
 
 if(USE_NAETT)
     target_compile_definitions(uli78studio PRIVATE USE_NAETT)
