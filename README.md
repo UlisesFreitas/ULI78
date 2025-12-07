@@ -31,6 +31,10 @@ To make a retro styled game, the whole process of creation and execution takes p
 - Games can have up to 4 controllers as input (with up to 16 buttons, each)
 - Built-in editors: for code, sprites, world maps, sound effects and music
 - An additional memory bank: load different assets from your cartridge while your game is executing
+- **AI Integration**: Built-in AI assistant in the code editor powered by [Ollama](https://ollama.ai) for local LLMs.
+    - Features an AI interaction sidebar to chat with the model.
+    - Helper for coding tasks, explanations, and generation.
+    - **Note**: Currently tested with local model `codellama:13b-instruct`.
 
 # Extended buttons for gamepad and keyboard
 | ACTION | P1 | P2 | P3 | P4 |
