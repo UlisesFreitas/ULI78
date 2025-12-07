@@ -1,12 +1,9 @@
-[![Build Status](https://github.com/uli78/ULI78/workflows/Build/badge.svg)](https://github.com/uli78/ULI78/actions?query=workflow%3ABuild)
-
 ![ULI78](https://uli78.com/img/logo64.png)
 **ULI78 TINY COMPUTER** — [uli78.com](https://uli78.com)
 
 - [About](#about)
-  - [Features](#features)
-- [Pro Version](#pro-version)
-  - [Pro Features](#pro-features)
+- [Features](#features)
+- [Pro Features](#pro-features)
 - [Build Instructions](#build-instructions)
   - [Windows](#windows)
       - [Windows 10 / 11 64-bit (x64)](#windows-10--11-64-bit-x64)
@@ -54,13 +51,6 @@ To make a retro styled game, the whole process of creation and execution takes p
 ## Stable Builds
 You can download compiled versions for the major operating systems directly from our [Releases](https://github.com/uli78/ULI78/releases) page.
 
-# Pro Version
-To help support ULI78 development, we have a [PRO Version](https://uli78.itch.io/uli78).
-
-This version has a few additional features and binaries can only be downloaded on our itch.io page.
-
-For users who can't afford the program can easily build the pro version from the source code using `cmake .. -DBUILD_PRO=On` command.
-
 ## Pro Features
 - Save/load cartridges in text format, and create your game in any editor you want, also useful for version control systems.
 - Even more memory banks: instead of having only 1 memory bank you have 8.
@@ -98,16 +88,23 @@ winget install Git.Git Kitware.CMake Microsoft.VisualStudio.2019.BuildTools Ruby
 git clone --recursive https://github.com/uli78/ULI78
 ```
 ```
-cd .\ULI78\build
+cd .\ULI78\
 ```
 ```
-cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=MinSizeRel -DBUILD_SDLGPU=On -DBUILD_WITH_ALL=On ..
+.\build.ps1 -clean
+```
+- If you get an error about Powershell not being able to run scripts, run `Set-ExecutionPolicy Bypass` in an elevated prompt
+- If you get an error about missing dependencies, run `ridk install` with options `1,3` to set up [MSYS2](https://www.msys2.org) and development toolchain
+
+- Do this again:
+```
+.\build.ps1 -clean
 ```
 ```
-cmake --build . --parallel
+To get back to the default policy, run `Set-ExecutionPolicy RemoteSigned` in an elevated prompt.
 ```
 
-You'll find `uli78.exe` in `ULI78\build\bin`.
+You'll find `uli78.exe` in `ULI78\uli78_pro\bin`.
 
 ## Credits
 * Filippo Rivato — [Twitter @HomineLudens](https://twitter.com/HomineLudens)

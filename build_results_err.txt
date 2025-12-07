@@ -1,0 +1,1 @@
+U:\ULI78\src\studio\fs.c(758,1): fatal error C1070: mismatched #if/#endif pair in file 'U:\ULI78\src\studio\fs.c' [U:\ULI78\uli78_pro\uli78studio.vcxproj]

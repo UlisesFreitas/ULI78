@@ -29,8 +29,6 @@ if(BUILD_TOOLS)
     target_include_directories(xplode PRIVATE ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/include)
     target_link_libraries(xplode uli78core png)
 
-    if(LINUX)
-        target_link_libraries(xplode m)
-    endif()
+
 
 endif()

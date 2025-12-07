@@ -29,9 +29,7 @@
 #include <string.h>
 #include <time.h>
 
-#if defined(__ULI_LINUX__)
-#include <signal.h>
-#endif
+
 
 #if defined(CRT_SHADER_SUPPORT)
 #include <SDL_gpu.h>
@@ -39,15 +37,9 @@
 #include <SDL.h>
 #endif
 
-#if defined(__EMSCRIPTEN__)
-#include <emscripten.h>
-#endif
 
-#if defined(__APPLE__)
-# if MAC_OS_X_VERSION_MIN_REQUIRED < 1060
-#    error SDL for Mac OS X only supports deploying on 10.6 and above.
-# endif /* MAC_OS_X_VERSION_MIN_REQUIRED < 1060 */
-#endif
+
+
 
 #define TEXTURE_SIZE (ULI78_FULLWIDTH)
 #define SCREEN_FORMAT ULI78_PIXEL_COLOR_RGBA8888
@@ -57,9 +49,7 @@
 #include <windows.h>
 #endif
 
-#if defined(__ULI_ANDROID__)
-#include <sys/stat.h>
-#endif
+
 
 #if defined(TOUCH_INPUT_SUPPORT)
 #define TOUCH_TIMEOUT (10 * ULI78_FRAMERATE)
@@ -201,20 +191,7 @@ static struct
 #endif
 ;
 
-#if defined(__RPI__)
 
-// !TODO: update SDL to 2.0.14 on RPI docker to support these functions
-SDL_bool SDL_GameControllerHasAxis(SDL_GameController *gamecontroller, SDL_GameControllerAxis axis)
-{
-    return SDL_TRUE;
-}
-
-SDL_bool SDL_GameControllerHasButton(SDL_GameController *gamecontroller, SDL_GameControllerButton button)
-{
-    return SDL_TRUE;
-}
-
-#endif
 
 static void destoryTexture(Texture texture)
 {

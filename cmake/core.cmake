@@ -38,10 +38,7 @@ endif()
 
 add_library(uli78core STATIC ${ULI78CORE_SRC})
 
-if (FREEBSD)
-    target_include_directories(uli78core PRIVATE ${SYSROOT_PATH}/usr/local/include)
-    target_link_directories(uli78core PRIVATE ${SYSROOT_PATH}/usr/local/lib)
-endif()
+
 
 if(WIN32)
     target_link_libraries(uli78core PUBLIC dlfcn)
@@ -122,6 +119,4 @@ if(BUILD_DEPRECATED)
     target_link_libraries(uli78core PRIVATE giflib)
 endif()
 
-if(LINUX)
-    target_link_libraries(uli78core PRIVATE m dl)
-endif()
+

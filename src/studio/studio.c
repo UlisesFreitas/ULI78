@@ -24,11 +24,7 @@
 
 #if defined(BUILD_EDITORS)
 
-#if defined(_WIN32)
 #include <windows.h>
-#else
-#include <sys/time.h>
-#endif
 
 #include "editors/code.h"
 #include "editors/sprite.h"
@@ -75,6 +71,8 @@
 
 // interval between the Windows and Unix epoch
 #define UNIX_EPOCH_IN_FILETIME 116444736000000000ULL
+
+
 
 #if defined(ULI78_PRO) && defined(BUILD_EDITORS)
 #define ULI_EDITOR_BANKS (ULI_BANKS)

@@ -1,0 +1,68 @@
+{
+    "project": "ULI78 Windows Refactor",
+    "version": "1.0.0",
+    "phases": [
+        {
+            "id": "phase-1",
+            "name": "Fase 1 - Limpieza de Archivos y Directorios de Plataformas Ajenas",
+            "status": "completed",
+            "tasks": [
+                {
+                    "description": "Eliminar scripts de build/debug de raíz para otros OS (debug-linux.sh, debug-macos.sh, Dockerfile, etc.)",
+                    "status": "completed"
+                },
+                {
+                    "description": "Buscar y eliminar archivos de plataformas ajenas (Mac, Linux, 3DS, RPi) en 'build/', 'cmake/', 'tools/'",
+                    "status": "completed"
+                },
+                {
+                    "description": "Limpiar integraciones no usadas en 'src' y 'include' (archivos específicos de plataforma)",
+                    "status": "completed"
+                },
+                {
+                    "description": "Revisar 'templates' para eliminar configuraciones de otros OS",
+                    "status": "completed"
+                }
+            ]
+        },
+        {
+            "id": "phase-2",
+            "name": "Fase 2 - Limpieza Profunda del Código Fuente (Source Sanitization)",
+            "status": "completed",
+            "description": "Eliminación de código muerto protegido por directivas de preprocesador de otros sistemas operativos.",
+            "tasks": [
+                {
+                    "description": "Escanear 'src' por directivas #ifdef/#if defined para LINUX, __APPLE__, __3DS__, RASPBERRY_PI, EMSCRIPTEN, etc.",
+                    "status": "completed"
+                },
+                {
+                    "description": "Eliminar bloques de código de otras plataformas y dejar solo la ruta de Windows/Generic donde aplique. (main.c, fs.c, net.c, studio.c, config.c cleaned)",
+                    "status": "completed"
+                },
+                {
+                    "description": "Validar que no se hayan roto dependencias críticas de Windows durante la limpieza. (Re-verification build PASSED)",
+                    "status": "completed"
+                }
+            ]
+        },
+        {
+            "id": "phase-3",
+            "name": "Fase 3 - Refactorización de CMake",
+            "status": "completed",
+            "tasks": [
+                {
+                    "description": "Auditar directorio 'cmake/' y eliminar módulos de find_package no usados en Windows.",
+                    "status": "completed"
+                },
+                {
+                    "description": "Desnudar 'CMakeLists.txt' de condiciones if(LINUX), if(APPLE), etc. (Done)",
+                    "status": "completed"
+                },
+                {
+                    "description": "Simplificar la configuración de build para apuntar únicamente a MSVC/MinGW en Windows. (sdl.cmake, core.cmake, tools.cmake cleaned)",
+                    "status": "completed"
+                }
+            ]
+        }
+    ]
+}

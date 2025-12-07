@@ -25,17 +25,9 @@
 #include "cart.h"
 #include "ext/json.h"
 
-#if defined(__EMSCRIPTEN__)
-#define DEFAULT_VSYNC 0
-#else
 #define DEFAULT_VSYNC 1
-#endif
 
-#if defined(__ULI_ANDROID__)
-#define INTEGER_SCALE_DEFAULT false
-#else
 #define INTEGER_SCALE_DEFAULT true
-#endif
 
 static void readConfig(Config* config)
 {
@@ -222,10 +214,7 @@ void initConfig(Config* config, Studio* studio, uli_fs* fs)
 
     loadOptions(config);
 
-#if defined(__ULI_LINUX__)
-    // do not load fullscreen option on Linux
-    config->data.options.fullscreen = false;
-#endif
+
 
     uli_api_reset(config->uli);
 }

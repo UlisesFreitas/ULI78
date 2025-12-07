@@ -14,9 +14,7 @@ set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2 -flto")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -flto")
 endif()
 
-if(APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
-endif()
+
 
 message("Building for target : ${CMAKE_SYSTEM_NAME}")
 message("PROJECT_VERSION: ${PROJECT_VERSION}${VERSION_STATUS}")
@@ -79,13 +77,7 @@ message("BUILD_TOUCH_INPUT: ${BUILD_TOUCH_INPUT}")
 message("BUILD_WITH_ALL: ${BUILD_WITH_ALL}")
 
 
-if(UNIX AND NOT APPLE)
-    set(LINUX TRUE)
 
-    if(CMAKE_HOST_SYSTEM_NAME STREQUAL "FreeBSD")
-        set(FREEBSD TRUE)
-    endif()
-endif()
 
 if (BUILD_NO_OPTIMIZATION)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0")
@@ -96,9 +88,7 @@ if (BUILD_ASAN_DEBUG)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
 
-    if (LINUX AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-        set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -shared-libasan")
-    endif()
+
 endif()
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -135,9 +125,7 @@ else()
     set(CMAKE_C_STANDARD 11)
 endif()
 
-if(RPI)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11")
-endif()
+
 
 set(THIRDPARTY_DIR ${CMAKE_SOURCE_DIR}/vendor)
 set(DEMO_CARTS_IN ${CMAKE_SOURCE_DIR}/demos)
