@@ -14,8 +14,6 @@ set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2 -flto")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -flto")
 endif()
 
-
-
 message("Building for target : ${CMAKE_SYSTEM_NAME}")
 message("PROJECT_VERSION: ${PROJECT_VERSION}${VERSION_STATUS}")
 message("VERSION_HASH: ${VERSION_HASH}")
@@ -48,7 +46,6 @@ option(BUILD_WITH_ZLIB "Build with zlib linked" ON)
 option(ULI78_TARGET "Target binary suffix")
 option(PREFER_SYSTEM_LIBRARIES "Prefer link with system libraries" OFF)
 
-
 if(NOT ULI78_TARGET)
     set(ULI78_TARGET uli78)
 endif()
@@ -76,9 +73,6 @@ message("BUILD_SDLGPU: ${BUILD_SDLGPU}")
 message("BUILD_TOUCH_INPUT: ${BUILD_TOUCH_INPUT}")
 message("BUILD_WITH_ALL: ${BUILD_WITH_ALL}")
 
-
-
-
 if (BUILD_NO_OPTIMIZATION)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
@@ -87,8 +81,6 @@ endif()
 if (BUILD_ASAN_DEBUG)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
-
-
 endif()
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -125,8 +117,6 @@ else()
     set(CMAKE_C_STANDARD 11)
 endif()
 
-
-
 set(THIRDPARTY_DIR ${CMAKE_SOURCE_DIR}/vendor)
 set(DEMO_CARTS_IN ${CMAKE_SOURCE_DIR}/demos)
 
@@ -136,15 +126,11 @@ include(cmake/zlib.cmake)
 include(cmake/zip.cmake)
 include(cmake/png.cmake)
 include(cmake/tools.cmake)
-
 include(cmake/lua.cmake)
-
 include(cmake/core.cmake)
 include(cmake/wave.cmake)
 include(cmake/argparse.cmake)
 include(cmake/naett.cmake)
 include(cmake/studio.cmake)
-
 include(cmake/sdl.cmake)
-
 include(cmake/install.cmake)
