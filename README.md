@@ -3,7 +3,6 @@
 
 - [About](#about)
 - [Features](#features)
-- [Pro Features](#pro-features)
 - [Build Instructions](#build-instructions)
   - [Windows](#windows)
       - [Windows 10 / 11 64-bit (x64)](#windows-10--11-64-bit-x64)
@@ -18,14 +17,15 @@ Games are packaged into a cartridge file, which can be easily distributed. ULI78
 
 To make a retro styled game, the whole process of creation and execution takes place under some technical limitations: 240x136 pixel display, 16 color palette, 256 8x8 color sprites, 4 channel sound, etc.
 
-![ULI78](https://user-images.githubusercontent.com/1101448/92492270-d6bcbc80-f1fb-11ea-9d2d-468ad015ace2.gif)
-
-### Features
+# Features
 - Programming languages: [Lua](https://www.lua.org)
-- Games can have mouse and keyboard as input
-- Games can have up to 4 controllers as input (with up to 16 buttons, each)
+- Games can have mouse and keyboard and gamepad as input.
+- Gamepad with up to 16 buttons.
 - Built-in editors: for code, sprites, world maps, sound effects and music
 - An additional memory bank: load different assets from your cartridge while your game is executing
+- Save/load cartridges in text format, and create your game in any editor you want, also useful for version control systems.
+- Even more memory banks: instead of having only 1 memory bank you have 8.
+- Export your game in local export for Windows.
 
 # Extended buttons for gamepad and keyboard
 | ACTION | P1 | P2 | P3 | P4 |
@@ -46,21 +46,21 @@ To make a retro styled game, the whole process of creation and execution takes p
 | R2/RT(R) | 13 | 29 | 45 | 61 |
 | GUIDE(G) | 14 | 30 | 46 | 62 |
 
-# Binary Downloads
 
-## Stable Builds
-You can download compiled versions for the major operating systems directly from our [Releases](https://github.com/uli78/ULI78/releases) page.
+# Export your cartidge for Windows
+## Use localexport win cartidgename
+This guide is for users who want to export their game to a local executable file for Windows.
 
-## Pro Features
-- Save/load cartridges in text format, and create your game in any editor you want, also useful for version control systems.
-- Even more memory banks: instead of having only 1 memory bank you have 8.
-- Export your game without editors, and then publish it to app stores.
+To use localexport, you need to have ULI78 installed on your computer.
+
+To export your game, run the following command:
+```
+localexport win cartidgename
+```
+- Result is a file called `cartidgename.exe` in the same directory as your cartridge.
 
 # Build instructions
-
-## Windows
-
-#### Windows 10 / 11 64-bit (x64)
+##  Windows 10 / 11 64-bit (x64)
 This guide assumes you're running PowerShell with an elevated prompt.
 
 - Install [Git](https://git-scm.com/download/win), [CMake](https://cmake.org/download), [Visual Studio 2019 Build Tools](https://winstall.app/apps/Microsoft.VisualStudio.2019.BuildTools) and [Ruby+Devkit 2.7.8 x64](https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.7.8-1/rubyinstaller-devkit-2.7.8-1-x64.exe) manually or with [WinGet](https://github.com/microsoft/winget-cli):
@@ -142,3 +142,4 @@ You'll find `uli78.exe` in `ULI78\uli78_pro\bin`.
 * NuSan — [Github @TheNuSan](https://github.com/thenusan)
 * Li Jin — [Github @pigpigyyy](https://github.com/pigpigyyy)
 * Dania Rifki — [Github @Kaleidosium](https://github.com/Kaleidosium)
+* Ulises Freitas — [Github @UlisesFreitas](https://github.com/UlisesFreitas)
